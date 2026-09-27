@@ -11,11 +11,11 @@ An Alpha particle (${}^4\text{He}$) consists of 4 bonded nucleons (2 protons + 2
 ```idris
 module Wiki.Observations.AlphaReplication
 
-import Core.BoxInt
-import Core.VexelMaxel
-import Geometry.LatticeTopology
+import Stage0.BoxInt
+import Stage1.VexelMaxel
+import Stage0.LatticeTopology
 import Wiki.Observations.HadronicConfinement
-import Core.UniverseState
+import Stage0.UniverseState
 import Data.Vect
 import Data.Fin
 
@@ -29,7 +29,7 @@ record NuclearCluster (k : Nat) where
 
 ||| Flattens a NuclearCluster into a contiguous (k * 27)-cell Visible Matter vector.
 public export
-flattenNuclearCluster : {k : Nat} -> NuclearCluster k -> Vect (k * 27) Core.BoxInt.BoxInt
+flattenNuclearCluster : {k : Nat} -> NuclearCluster k -> Vect (k * 27) Stage0.BoxInt.BoxInt
 flattenNuclearCluster (MkNuclearCluster []) = []
 flattenNuclearCluster (MkNuclearCluster ((MkHadronState grid) :: rest)) =
   grid ++ flattenNuclearCluster (MkNuclearCluster rest)
@@ -47,7 +47,7 @@ AlphaClusterState = NuclearCluster 4
 
 ||| Flattens an AlphaClusterState into a contiguous 108-cell Visible Matter vector.
 public export
-flattenAlphaCluster : AlphaClusterState -> Vect 108 Core.BoxInt.BoxInt
+flattenAlphaCluster : AlphaClusterState -> Vect 108 Stage0.BoxInt.BoxInt
 flattenAlphaCluster alpha = flattenNuclearCluster alpha
 
 ||| Initializes a Ground-State Alpha Cluster at Epoch 4.
@@ -59,10 +59,10 @@ seedAlphaClusterEpoch4 =
 
 ||| Computes total bound valence flux of the Alpha Cluster (4 x 27 = 108).
 public export
-totalAlphaFlux : AlphaClusterState -> Core.BoxInt.BoxInt
+totalAlphaFlux : AlphaClusterState -> Stage0.BoxInt.BoxInt
 totalAlphaFlux alpha =
   let flat = flattenAlphaCluster alpha
-  in foldl (+) (Core.BoxInt.intToBoxInt 0) flat
+  in foldl (+) (Stage0.BoxInt.intToBoxInt 0) flat
 
 ||| Validates Nuclear Stability & S-Wave Symmetry.
 public export
@@ -112,5 +112,5 @@ tripleAlphaCarbonBalanceArray = MkBalanceArray [3, 0] [0, 1]
 public export
 auditTripleAlphaCarbonBalanceProof : Bool
 auditTripleAlphaCarbonBalanceProof =
-  Core.BoxInt.intToBoxInt (3 * 108) == Core.BoxInt.intToBoxInt 324
+  Stage0.BoxInt.intToBoxInt (3 * 108) == Stage0.BoxInt.intToBoxInt 324
 ```

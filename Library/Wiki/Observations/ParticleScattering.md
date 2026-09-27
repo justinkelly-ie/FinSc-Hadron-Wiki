@@ -15,9 +15,9 @@ Discrete scattering kinematics enforce strict conservation of total charge and m
 ```idris
 module Wiki.Observations.ParticleScattering
 
-import Core.BoxInt
-import Core.UnixelFraction
-import Core.Multiset
+import Stage0.BoxInt
+import Stage1.UnixelFraction
+import Stage0.Multiset
 import Wiki.Observations.StandardModel
 import Data.Vect
 import Data.List

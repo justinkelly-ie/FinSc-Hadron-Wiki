@@ -11,12 +11,12 @@ Quark and Hadron states are represented as discrete 1D Vexels and 3D Boxel multi
 ```idris
 module Wiki.Observations.QuarkHadronAlgebra
 
-import Core.BoxInt
-import Core.Multiset
-import Core.VexelMaxel
-import Core.UnixelFraction
+import Stage0.BoxInt
+import Stage0.Multiset
+import Stage1.VexelMaxel
+import Stage1.UnixelFraction
 import Core
-import Math.ExclusionPrinciple
+import Stage1.ExclusionPrinciple
 import Wiki.Observations.HadronicConfinement
 import Data.List
 import Data.Fin
@@ -45,13 +45,13 @@ HadronBoxel = Boxel
 public export
 makeUpQuarkVexel : (colorIdx : Nat) -> QuarkVexel
 makeUpQuarkVexel col =
-  MkVexel [(MkUnixel col, Core.BoxInt.intToBoxInt 9)]
+  MkVexel [(MkUnixel col, Stage0.BoxInt.intToBoxInt 9)]
 
 ||| Generates a pure multiset Down-Quark Vexel in a given color sector.
 public export
 makeDownQuarkVexel : (colorIdx : Nat) -> QuarkVexel
 makeDownQuarkVexel col =
-  MkVexel [(MkUnixel col, Core.BoxInt.intToBoxInt 9)]
+  MkVexel [(MkUnixel col, Stage0.BoxInt.intToBoxInt 9)]
 
 ------------------------------------------------------------------------
 -- 3. COMBINATORS
@@ -70,7 +70,7 @@ hadronizeQuarkVexels qR qG qB =
 
 ||| Observation: Total Mass Tokens of a Hadron Boxel (must equal 27).
 public export
-observeHadronMassTokens : HadronBoxel -> Core.BoxInt.BoxInt
+observeHadronMassTokens : HadronBoxel -> Stage0.BoxInt.BoxInt
 observeHadronMassTokens b = totalBoxelWeight b
 
 ||| Observation: Color Neutrality via Z-slice symmetry on Boxels.
@@ -93,6 +93,6 @@ observeHadronBaryonFraction b =
 public export
 auditQuarkHadronAlgebraProof : Bool
 auditQuarkHadronAlgebraProof =
-  (observeHadronMassTokens seedHadronBoxel == Core.BoxInt.intToBoxInt 27) &&
+  (observeHadronMassTokens seedHadronBoxel == Stage0.BoxInt.intToBoxInt 27) &&
   (observeHadronColorNeutrality seedHadronBoxel == True)
 ```

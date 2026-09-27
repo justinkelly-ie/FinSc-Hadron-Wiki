@@ -12,9 +12,9 @@ The Standard Model of particle physics categorizes fundamental constituents into
 module Wiki.Observations.StandardModel
 
 import Language.Reflection
-import Core.BoxInt
-import Core.Multiset
-import Core.UnixelFraction
+import Stage0.BoxInt
+import Stage0.Multiset
+import Stage1.UnixelFraction
 import Data.List
 
 %default total

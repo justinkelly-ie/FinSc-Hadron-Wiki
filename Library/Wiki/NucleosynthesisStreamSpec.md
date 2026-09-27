@@ -10,9 +10,9 @@ module Wiki.NucleosynthesisStreamSpec
 import Data.List
 import Data.Fuel
 import Core
-import Core.Order.Preorder
+import Stage1.Order.Preorder
 import Hadron
-import Math.OnSeq.FusedStream
+import Stage0.OnSeq.FusedStream
 
 %default total
 

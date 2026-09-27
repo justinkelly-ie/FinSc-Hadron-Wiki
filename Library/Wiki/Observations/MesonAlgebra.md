@@ -11,12 +11,12 @@ Mesons ($\pi^+, \pi^-, \pi^0, K^+, K^-, K^0$) are 2-quark bound states ($q\bar{q
 ```idris
 module Wiki.Observations.MesonAlgebra
 
-import Core.BoxInt
-import Core.Multiset
-import Core.VexelMaxel
-import Core.UnixelFraction
+import Stage0.BoxInt
+import Stage0.Multiset
+import Stage1.VexelMaxel
+import Stage1.UnixelFraction
 import Core
-import Math.ExclusionPrinciple
+import Stage1.ExclusionPrinciple
 import Data.List
 
 %default total
@@ -61,24 +61,24 @@ Show MesonSpec where
 public export
 makePionPlusVexel : MesonVexel
 makePionPlusVexel =
-  MkVexel [ (MkUnixel 1, Core.BoxInt.intToBoxInt 9)  -- Up Quark (Red)
-          , (MkUnixel 2, Core.BoxInt.intToBoxInt 9)  -- Anti-Down Quark (Anti-Green)
+  MkVexel [ (MkUnixel 1, Stage0.BoxInt.intToBoxInt 9)  -- Up Quark (Red)
+          , (MkUnixel 2, Stage0.BoxInt.intToBoxInt 9)  -- Anti-Down Quark (Anti-Green)
           ]
 
 ||| Constructs a Pion- (d u_bar) 18-token Vexel multiset.
 public export
 makePionMinusVexel : MesonVexel
 makePionMinusVexel =
-  MkVexel [ (MkUnixel 2, Core.BoxInt.intToBoxInt 9)  -- Down Quark (Green)
-          , (MkUnixel 1, Core.BoxInt.intToBoxInt 9)  -- Anti-Up Quark (Anti-Red)
+  MkVexel [ (MkUnixel 2, Stage0.BoxInt.intToBoxInt 9)  -- Down Quark (Green)
+          , (MkUnixel 1, Stage0.BoxInt.intToBoxInt 9)  -- Anti-Up Quark (Anti-Red)
           ]
 
 ||| Constructs a Kaon+ (u s_bar) 18-token Vexel multiset.
 public export
 makeKaonPlusVexel : MesonVexel
 makeKaonPlusVexel =
-  MkVexel [ (MkUnixel 1, Core.BoxInt.intToBoxInt 9)  -- Up Quark
-          , (MkUnixel 3, Core.BoxInt.intToBoxInt 9)  -- Anti-Strange Quark
+  MkVexel [ (MkUnixel 1, Stage0.BoxInt.intToBoxInt 9)  -- Up Quark
+          , (MkUnixel 3, Stage0.BoxInt.intToBoxInt 9)  -- Anti-Strange Quark
           ]
 
 ------------------------------------------------------------------------
@@ -88,7 +88,7 @@ makeKaonPlusVexel =
 ||| Observation: Total Mass Tokens of a Meson Vexel.
 %inline
 public export
-observeMesonMassTokens : MesonVexel -> Core.BoxInt.BoxInt
+observeMesonMassTokens : MesonVexel -> Stage0.BoxInt.BoxInt
 observeMesonMassTokens m = totalVexelMass m
 
 ||| Verifies Color-Anticolor Neutrality on a Meson Vexel.
@@ -97,7 +97,7 @@ public export
 isMesonColorNeutral : MesonVexel -> Bool
 isMesonColorNeutral (MkVexel terms) =
   case terms of
-    [(s1, w1), (s2, w2)] => w1 == Core.BoxInt.intToBoxInt 9 && w2 == Core.BoxInt.intToBoxInt 9
+    [(s1, w1), (s2, w2)] => w1 == Stage0.BoxInt.intToBoxInt 9 && w2 == Stage0.BoxInt.intToBoxInt 9
     _ => False
 
 ------------------------------------------------------------------------
@@ -109,5 +109,5 @@ isMesonColorNeutral (MkVexel terms) =
 public export
 auditMesonAlgebraProof : Bool
 auditMesonAlgebraProof =
-  (Core.BoxInt.intToBoxInt 18 == Core.BoxInt.intToBoxInt 18)
+  (Stage0.BoxInt.intToBoxInt 18 == Stage0.BoxInt.intToBoxInt 18)
 ```

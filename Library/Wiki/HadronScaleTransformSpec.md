@@ -33,7 +33,9 @@ module Wiki.HadronScaleTransformSpec
 
 import Core
 import Transform
-import Hadron
+import Stage1.ScaleTransform
+import Wiki.Observations.HadronicConfinement
+import Wiki.Observations.StandardModel
 import Wiki.Generators
 import public QuickCheck
 
@@ -41,29 +43,29 @@ import public QuickCheck
 
 ||| Observable quantum projection for color charges:
 public export
-colorToNat : ColorCharge -> Nat
+colorToNat : Wiki.Observations.HadronicConfinement.ColorCharge -> Nat
 colorToNat RedColor   = 1
 colorToNat GreenColor = 2
 colorToNat BlueColor  = 3
 
 ||| 1. Scale Transform Color Charge Positivity: T(c) > 0
 public export
-prop_scalePreservesColor : ColorCharge -> Bool
+prop_scalePreservesColor : Wiki.Observations.HadronicConfinement.ColorCharge -> Bool
 prop_scalePreservesColor c =
   let z : Nat = scaleTransform c
   in z > 0
 
 ||| 2. Invert Scale Adjunction Inversion: T^-1(T(c)) == c
 public export
-prop_invertScaleAdjunction : ColorCharge -> Bool
+prop_invertScaleAdjunction : Wiki.Observations.HadronicConfinement.ColorCharge -> Bool
 prop_invertScaleAdjunction c =
   let z : Nat = scaleTransform c
-      c' : ColorCharge = invertScaleTransform z
+      c' : Wiki.Observations.HadronicConfinement.ColorCharge = invertScaleTransform z
   in c' == c
 
 ||| 3. Observable Preservation Homomorphism: T(c) == colorToNat(c)
 public export
-prop_observablePreserved : ColorCharge -> Bool
+prop_observablePreserved : Wiki.Observations.HadronicConfinement.ColorCharge -> Bool
 prop_observablePreserved c =
   let z : Nat = scaleTransform c
   in z == colorToNat c
@@ -71,12 +73,12 @@ prop_observablePreserved c =
 ||| 4. Standard Model Catalog Invariant Verification
 public export
 prop_standardModelCatalogValid : Bool
-prop_standardModelCatalogValid = auditFullStandardModelCatalogProof
+prop_standardModelCatalogValid = Wiki.Observations.StandardModel.auditFullStandardModelCatalogProof
 
 ||| 5. Hadron Singlet Balance Neutrality Verification
 public export
 prop_hadronSingletBalanceValid : Bool
-prop_hadronSingletBalanceValid = auditHadronSingletBalanceProof
+prop_hadronSingletBalanceValid = Wiki.Observations.HadronicConfinement.auditHadronSingletBalanceProof
 
 ||| QuickCheck Verification Runner
 public export

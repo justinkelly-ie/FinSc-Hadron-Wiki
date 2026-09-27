@@ -18,13 +18,13 @@ The type-level functors guarantee compile-time conservation of quantum numbers a
 module Wiki.Observations.TypeIndexedMultiset
 
 import Language.Reflection
-import Math.Singleton.Bit
-import Core.BoxInt
-import Core.Multiset
-import Core.VexelMaxel
-import Core.UnixelFraction
+import Stage0.Singleton.Bit
+import Stage0.BoxInt
+import Stage0.Multiset
+import Stage1.VexelMaxel
+import Stage1.UnixelFraction
 import Core
-import Math.ExclusionPrinciple
+import Stage1.ExclusionPrinciple
 import Wiki.Observations.HadronicConfinement
 import Wiki.Observations.AlphaReplication
 import Wiki.Observations.QuarkHadronAlgebra
@@ -124,7 +124,7 @@ record RefinedQuark (spec : QuarkSpec) (col : ColorSector) where
   constructor MkRefinedQuark
   vexelCarrier : QuarkVexel
   0 tokenProof : (case vexelCarrier of
-                    MkVexel [(MkUnixel c, w)] => c == colorToNat col && w == Core.BoxInt.intToBoxInt 9
+                    MkVexel [(MkUnixel c, w)] => c == colorToNat col && w == Stage0.BoxInt.intToBoxInt 9
                     _ => False) = True
 
 ||| Refined Hadron: 3D Boxel (27 mass tokens) with verified color neutrality.
@@ -145,8 +145,8 @@ record RefinedAlpha (spec : AlphaSpec) where
 public export
 record RefinedNucleus (spec : NucleusSpec) where
   constructor MkRefinedNucleus
-  nucleusTokens     : Core.BoxInt.BoxInt
-  0 tokenCountProof : (nucleusTokens == Core.BoxInt.intToBoxInt 324) = True
+  nucleusTokens     : Stage0.BoxInt.BoxInt
+  0 tokenCountProof : (nucleusTokens == Stage0.BoxInt.intToBoxInt 324) = True
 
 ------------------------------------------------------------------------
 -- 3. TYPED SMART CONSTRUCTORS & MORPHISMS
@@ -203,7 +203,7 @@ fuseCarbon12Nucleus : RefinedAlpha Helium4Core ->
                       RefinedAlpha Helium4Core ->
                       RefinedNucleus Carbon12Core
 fuseCarbon12Nucleus (MkRefinedAlpha _ _) (MkRefinedAlpha _ _) (MkRefinedAlpha _ _) =
-  MkRefinedNucleus (Core.BoxInt.intToBoxInt 324) Refl
+  MkRefinedNucleus (Stage0.BoxInt.intToBoxInt 324) Refl
 
 ------------------------------------------------------------------------
 -- 4. MAGUIRE ADD OBSERVATIONS ON REFINED CARRIERS
@@ -212,22 +212,22 @@ fuseCarbon12Nucleus (MkRefinedAlpha _ _) (MkRefinedAlpha _ _) (MkRefinedAlpha _ 
 ||| Observation: Exact Hadron Charge (Proton = +1, Neutron = 0).
 public export
 observeRefinedHadronCharge : (s : HadronSpec) -> RefinedHadron s -> UnixelFraction
-observeRefinedHadronCharge ProtonSpec _  = MkUnixelFraction (Core.BoxInt.intToBoxInt 3) (MkUnixel 3)
-observeRefinedHadronCharge NeutronSpec _ = MkUnixelFraction (Core.BoxInt.intToBoxInt 0) (MkUnixel 3)
+observeRefinedHadronCharge ProtonSpec _  = MkUnixelFraction (Stage0.BoxInt.intToBoxInt 3) (MkUnixel 3)
+observeRefinedHadronCharge NeutronSpec _ = MkUnixelFraction (Stage0.BoxInt.intToBoxInt 0) (MkUnixel 3)
 
 ||| Observation: Total Mass Tokens of a Refined Hadron (27 tokens).
 public export
-observeRefinedHadronMass : RefinedHadron spec -> Core.BoxInt.BoxInt
+observeRefinedHadronMass : RefinedHadron spec -> Stage0.BoxInt.BoxInt
 observeRefinedHadronMass (MkRefinedHadron carrier _) = totalBoxelWeight carrier
 
 ||| Observation: Total Mass Tokens of a Refined Alpha Particle (108 tokens).
 public export
-observeRefinedAlphaMass : RefinedAlpha spec -> Core.BoxInt.BoxInt
+observeRefinedAlphaMass : RefinedAlpha spec -> Stage0.BoxInt.BoxInt
 observeRefinedAlphaMass (MkRefinedAlpha carrier _) = totalBoxelWeight carrier
 
 ||| Observation: Total Nucleon Tokens of a Refined Carbon-12 Nucleus (324 tokens).
 public export
-observeRefinedNucleusTokens : RefinedNucleus spec -> Core.BoxInt.BoxInt
+observeRefinedNucleusTokens : RefinedNucleus spec -> Stage0.BoxInt.BoxInt
 observeRefinedNucleusTokens (MkRefinedNucleus tokens _) = tokens
 
 ------------------------------------------------------------------------
@@ -239,9 +239,9 @@ observeRefinedNucleusTokens (MkRefinedNucleus tokens _) = tokens
 public export
 auditTypeIndexedMultisetProof : Bool
 auditTypeIndexedMultisetProof =
-  (Core.BoxInt.intToBoxInt 27 == Core.BoxInt.intToBoxInt 27) &&
-  (Core.BoxInt.intToBoxInt 108 == Core.BoxInt.intToBoxInt 108) &&
-  (Core.BoxInt.intToBoxInt 324 == Core.BoxInt.intToBoxInt 324)
+  (Stage0.BoxInt.intToBoxInt 27 == Stage0.BoxInt.intToBoxInt 27) &&
+  (Stage0.BoxInt.intToBoxInt 108 == Stage0.BoxInt.intToBoxInt 108) &&
+  (Stage0.BoxInt.intToBoxInt 324 == Stage0.BoxInt.intToBoxInt 324)
 
 public export
 auditTypeIndexedMultisetProofBit : Bit

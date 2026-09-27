@@ -11,12 +11,12 @@ In Quantum Chromodynamics (QCD), gluons form an $SU(3)$ color-octet of 8 gauge b
 ```idris
 module Wiki.Observations.GaugeBosons
 
-import Core.BoxInt
-import Core.Multiset
-import Core.VexelMaxel
-import Core.UnixelFraction
+import Stage0.BoxInt
+import Stage0.Multiset
+import Stage1.VexelMaxel
+import Stage1.UnixelFraction
 import Core
-import Math.ExclusionPrinciple
+import Stage1.ExclusionPrinciple
 import Wiki.Observations.HadronicConfinement
 import Wiki.Observations.QuarkHadronAlgebra
 import Data.List
@@ -48,24 +48,24 @@ Eq GluonIndex where
 ||| A Gluon is an SU(3) color-exchange Maxel matrix [color_in, color_out].
 public export
 GluonMaxel : Type
-GluonMaxel = Core.VexelMaxel.Maxel
+GluonMaxel = Stage1.VexelMaxel.Maxel
 
 ||| Constructs the Maxel matrix for a given Gluon octet component.
 public export
 makeGluonMaxel : GluonIndex -> GluonMaxel
-makeGluonMaxel G1_RedAntiGreen  = Core.VexelMaxel.MkMaxel [(MkPixel 1 2, Core.BoxInt.intToBoxInt 1)]
-makeGluonMaxel G2_RedAntiBlue   = Core.VexelMaxel.MkMaxel [(MkPixel 1 3, Core.BoxInt.intToBoxInt 1)]
-makeGluonMaxel G3_GreenAntiRed  = Core.VexelMaxel.MkMaxel [(MkPixel 2 1, Core.BoxInt.intToBoxInt 1)]
-makeGluonMaxel G4_GreenAntiBlue = Core.VexelMaxel.MkMaxel [(MkPixel 2 3, Core.BoxInt.intToBoxInt 1)]
-makeGluonMaxel G5_BlueAntiRed   = Core.VexelMaxel.MkMaxel [(MkPixel 3 1, Core.BoxInt.intToBoxInt 1)]
-makeGluonMaxel G6_BlueAntiGreen = Core.VexelMaxel.MkMaxel [(MkPixel 3 2, Core.BoxInt.intToBoxInt 1)]
-makeGluonMaxel G7_NeutralDiag1  = Core.VexelMaxel.MkMaxel [(MkPixel 1 1, Core.BoxInt.intToBoxInt 1), (MkPixel 2 2, Core.BoxInt.intToBoxInt (-1))]
-makeGluonMaxel G8_NeutralDiag2  = Core.VexelMaxel.MkMaxel [(MkPixel 1 1, Core.BoxInt.intToBoxInt 1), (MkPixel 2 2, Core.BoxInt.intToBoxInt 1), (MkPixel 3 3, Core.BoxInt.intToBoxInt (-2))]
+makeGluonMaxel G1_RedAntiGreen  = Stage1.VexelMaxel.MkMaxel [(MkPixel 1 2, Stage0.BoxInt.intToBoxInt 1)]
+makeGluonMaxel G2_RedAntiBlue   = Stage1.VexelMaxel.MkMaxel [(MkPixel 1 3, Stage0.BoxInt.intToBoxInt 1)]
+makeGluonMaxel G3_GreenAntiRed  = Stage1.VexelMaxel.MkMaxel [(MkPixel 2 1, Stage0.BoxInt.intToBoxInt 1)]
+makeGluonMaxel G4_GreenAntiBlue = Stage1.VexelMaxel.MkMaxel [(MkPixel 2 3, Stage0.BoxInt.intToBoxInt 1)]
+makeGluonMaxel G5_BlueAntiRed   = Stage1.VexelMaxel.MkMaxel [(MkPixel 3 1, Stage0.BoxInt.intToBoxInt 1)]
+makeGluonMaxel G6_BlueAntiGreen = Stage1.VexelMaxel.MkMaxel [(MkPixel 3 2, Stage0.BoxInt.intToBoxInt 1)]
+makeGluonMaxel G7_NeutralDiag1  = Stage1.VexelMaxel.MkMaxel [(MkPixel 1 1, Stage0.BoxInt.intToBoxInt 1), (MkPixel 2 2, Stage0.BoxInt.intToBoxInt (-1))]
+makeGluonMaxel G8_NeutralDiag2  = Stage1.VexelMaxel.MkMaxel [(MkPixel 1 1, Stage0.BoxInt.intToBoxInt 1), (MkPixel 2 2, Stage0.BoxInt.intToBoxInt 1), (MkPixel 3 3, Stage0.BoxInt.intToBoxInt (-2))]
 
 ||| Applies a Gluon Maxel color exchange operator to a Quark Vexel.
 public export
 actGluonOnQuark : GluonMaxel -> QuarkVexel -> QuarkVexel
-actGluonOnQuark g q = Core.VexelMaxel.actMaxelVexel g q
+actGluonOnQuark g q = Stage1.VexelMaxel.actMaxelVexel g q
 
 ------------------------------------------------------------------------
 -- 2. ELECTROWEAK BOSONS & BETA DECAY OPERATOR
@@ -85,7 +85,7 @@ Eq ElectroweakBoson where
 
 ||| Beta Decay Operator (n -> p + e- + nu_bar).
 public export
-betaDecayNucleon : HadronBoxel -> (HadronBoxel, Core.BoxInt.BoxInt)
+betaDecayNucleon : HadronBoxel -> (HadronBoxel, Stage0.BoxInt.BoxInt)
 betaDecayNucleon neutronBoxel =
   let protonBoxel = seedHadronBoxel
       releasedMass = totalBoxelWeight neutronBoxel - totalBoxelWeight protonBoxel
@@ -99,5 +99,5 @@ betaDecayNucleon neutronBoxel =
 public export
 auditGaugeBosonProof : Bool
 auditGaugeBosonProof =
-  (Core.BoxInt.intToBoxInt 27 == Core.BoxInt.intToBoxInt 27)
+  (Stage0.BoxInt.intToBoxInt 27 == Stage0.BoxInt.intToBoxInt 27)
 ```

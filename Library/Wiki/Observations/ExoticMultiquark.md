@@ -14,10 +14,10 @@ Beyond standard $q\bar{q}$ mesons and $qqq$ baryons, Quantum Chromodynamics allo
 ```idris
 module Wiki.Observations.ExoticMultiquark
 
-import Core.BoxInt
-import Core.Multiset
-import Core.VexelMaxel
-import Core.UnixelFraction
+import Stage0.BoxInt
+import Stage0.Multiset
+import Stage1.VexelMaxel
+import Stage1.UnixelFraction
 import Wiki.Observations.HadronicConfinement
 import Wiki.Observations.QuarkHadronAlgebra
 import Wiki.Observations.MesonAlgebra

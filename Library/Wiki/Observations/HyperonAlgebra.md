@@ -11,12 +11,12 @@ Hyperons ($\Lambda^0, \Sigma^{\pm,0}, \Xi^{-,0}, \Omega^-$) are strange 3-quark 
 ```idris
 module Wiki.Observations.HyperonAlgebra
 
-import Core.BoxInt
-import Core.Multiset
-import Core.VexelMaxel
-import Core.UnixelFraction
+import Stage0.BoxInt
+import Stage0.Multiset
+import Stage1.VexelMaxel
+import Stage1.UnixelFraction
 import Core
-import Math.ExclusionPrinciple
+import Stage1.ExclusionPrinciple
 import Wiki.Observations.HadronicConfinement
 import Wiki.Observations.QuarkHadronAlgebra
 import Wiki.Observations.TypeIndexedMultiset
@@ -77,7 +77,7 @@ makeLambdaZeroBoxel =
 ||| Evaluates mass tokens of a Hyperon Boxel.
 %inline
 public export
-observeHyperonMassTokens : HadronBoxel -> Core.BoxInt.BoxInt
+observeHyperonMassTokens : HadronBoxel -> Stage0.BoxInt.BoxInt
 observeHyperonMassTokens (MkBoxel [(v1, MkBoxInt w1), (v2, MkBoxInt w2), (v3, MkBoxInt w3)]) =
   MkBoxInt (w1 + w2 + w3)
 observeHyperonMassTokens b = totalBoxelWeight b

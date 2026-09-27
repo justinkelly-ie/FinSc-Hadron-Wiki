@@ -2,18 +2,19 @@ module Wiki.Generators
 
 import public QuickCheck
 import Core
-import Hadron
+import Wiki.Observations.HadronicConfinement
+import Wiki.Observations.StandardModel
 
 %default total
 
 public export
-natToColorCharge : Nat -> ColorCharge
+natToColorCharge : Nat -> Wiki.Observations.HadronicConfinement.ColorCharge
 natToColorCharge Z = RedColor
 natToColorCharge (S Z) = GreenColor
 natToColorCharge (S (S _)) = BlueColor
 
 public export
-Arbitrary ColorCharge where
+Arbitrary Wiki.Observations.HadronicConfinement.ColorCharge where
   arbitrary = map natToColorCharge arbitrary
 
   coarbitrary RedColor gen   = coarbitrary (the Nat 0) gen
@@ -21,7 +22,7 @@ Arbitrary ColorCharge where
   coarbitrary BlueColor gen  = coarbitrary (the Nat 2) gen
 
 public export
-natToFermion : Nat -> SMFermion
+natToFermion : Nat -> Wiki.Observations.StandardModel.SMFermion
 natToFermion Z = QuarkU
 natToFermion (S Z) = QuarkD
 natToFermion (S (S Z)) = QuarkC
@@ -35,13 +36,13 @@ natToFermion (S (S (S (S (S (S (S (S (S Z))))))))) = LepNuE
 natToFermion (S (S (S (S (S (S (S (S (S (S _)))))))))) = AntiLepE
 
 public export
-Arbitrary SMFermion where
+Arbitrary Wiki.Observations.StandardModel.SMFermion where
   arbitrary = map natToFermion arbitrary
 
   coarbitrary f gen = coarbitrary (the Nat 0) gen
 
 public export
-natToBoson : Nat -> SMBoson
+natToBoson : Nat -> Wiki.Observations.StandardModel.SMBoson
 natToBoson Z = Photon
 natToBoson (S Z) = WPlus
 natToBoson (S (S Z)) = WMinus
@@ -49,13 +50,13 @@ natToBoson (S (S (S Z))) = Z0
 natToBoson (S (S (S (S _)))) = Higgs0
 
 public export
-Arbitrary SMBoson where
+Arbitrary Wiki.Observations.StandardModel.SMBoson where
   arbitrary = map natToBoson arbitrary
 
   coarbitrary b gen = coarbitrary (the Nat 0) gen
 
 public export
-Arbitrary StandardModelParticle where
+Arbitrary Wiki.Observations.StandardModel.StandardModelParticle where
   arbitrary = do
     b <- arbitrary {a = Bool}
     if b then map SMPFermion arbitrary else map SMPBoson arbitrary

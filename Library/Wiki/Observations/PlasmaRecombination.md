@@ -11,8 +11,8 @@ In the early Universe, high-energy plasma composed of ionized protons ($p^+$) an
 ```idris
 module Wiki.Observations.PlasmaRecombination
 
-import Core.BoxInt
-import Core.VexelMaxel
+import Stage0.BoxInt
+import Stage1.VexelMaxel
 import Wiki.Observations.HadronicConfinement
 import Data.Vect
 

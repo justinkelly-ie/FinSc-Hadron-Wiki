@@ -11,8 +11,8 @@ In high-energy heavy-ion collisions, matter transitions between the Quark-Gluon 
 ```idris
 module Wiki.Observations.HadronizationEngine
 
-import Core.BoxInt
-import Core.Multiset
+import Stage0.BoxInt
+import Stage0.Multiset
 import Wiki.Observations.StandardModel
 import Data.Vect
 import Data.List

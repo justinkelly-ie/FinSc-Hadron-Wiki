@@ -11,12 +11,12 @@ Heavy Mesons and Quarkonium states ($c\bar{c}$ Charmonium and $b\bar{b}$ Upsilon
 ```idris
 module Wiki.Observations.HeavyMesonAlgebra
 
-import Core.BoxInt
-import Core.Multiset
-import Core.VexelMaxel
-import Core.UnixelFraction
+import Stage0.BoxInt
+import Stage0.Multiset
+import Stage1.VexelMaxel
+import Stage1.UnixelFraction
 import Core
-import Math.ExclusionPrinciple
+import Stage1.ExclusionPrinciple
 import Wiki.Observations.TypeIndexedMultiset
 import Wiki.Observations.MesonAlgebra
 import Data.List
@@ -85,7 +85,7 @@ makeUpsilonBottomoniumVexel =
 ||| Evaluates mass tokens of a Heavy Meson Vexel.
 %inline
 public export
-observeHeavyMesonMassTokens : MesonVexel -> Core.BoxInt.BoxInt
+observeHeavyMesonMassTokens : MesonVexel -> Stage0.BoxInt.BoxInt
 observeHeavyMesonMassTokens (MkVexel [(u1, MkBoxInt w1), (u2, MkBoxInt w2)]) = MkBoxInt (w1 + w2)
 observeHeavyMesonMassTokens m = totalVexelMass m
 

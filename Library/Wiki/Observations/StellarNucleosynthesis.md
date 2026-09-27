@@ -11,8 +11,8 @@ Stellar interiors fuse Hydrogen and Helium into essential biochemical elements (
 ```idris
 module Wiki.Observations.StellarNucleosynthesis
 
-import Core.BoxInt
-import Core.VexelMaxel
+import Stage0.BoxInt
+import Stage1.VexelMaxel
 import Wiki.Observations.HadronicConfinement
 import Wiki.Observations.AlphaReplication
 import Data.Vect
