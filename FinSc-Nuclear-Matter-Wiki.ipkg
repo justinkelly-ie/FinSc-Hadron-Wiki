@@ -1,9 +1,9 @@
-package FinSc-Hadron-Wiki
+package FinSc-Nuclear-Matter-Wiki
 version = 0.1.0
 authors = "Justin Kelly"
-brief   = "Executable Verification Wiki & ScaleTransform Specs for FinSc-Hadron"
+brief   = "Executable Verification Wiki & ScaleTransform Specs for FinSc-Nuclear-Matter"
 
-depends = FinSc-Chemistry, FinSc-Gauge-Fields, FinSc-Hadron, FinSc-Multiset, FinSc-Metric-Substrate, FinSc-Phase-Unfolding, base, idris2-QuickCheck, linear
+depends = FinSc-Chemistry, FinSc-Gauge-Fields, FinSc-Nuclear-Matter, FinSc-Multiset, FinSc-Metric-Substrate, FinSc-Phase-Unfolding, base, idris2-QuickCheck, linear
 sourcedir = "Library"
 
 modules = Wiki.Generators,
@@ -28,4 +28,4 @@ modules = Wiki.Generators,
           Wiki.Observations.TypeIndexedMultiset
 
 main = Wiki.Main
-executable = hadron-wiki
+executable = nuclear-matter-wiki
