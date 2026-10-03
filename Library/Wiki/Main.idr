@@ -22,8 +22,19 @@ import Wiki.Observations.StellarNucleosynthesis
 import Wiki.Observations.CosmicNucleosynthesis
 import Wiki.Observations.PlasmaRecombination
 import Wiki.Observations.AlphaReplication
+import Reflect.NuclearAuditor
 
 %default total
+
+||| Compile-time macro invariant witnesses (Rule 01)
+0 prfAuditColorSingletNeutrality : Reflect.NuclearAuditor.auditColorSingletNeutralityProof = True
+prfAuditColorSingletNeutrality = auditColorSingletNeutrality
+
+0 prfAuditBaryonConfinementBound : Reflect.NuclearAuditor.auditBaryonConfinementBoundProof = True
+prfAuditBaryonConfinementBound = auditBaryonConfinementBound
+
+0 prfAuditTripleAlphaFusion : Reflect.NuclearAuditor.auditTripleAlphaFusionProof = True
+prfAuditTripleAlphaFusion = auditTripleAlphaFusion
 
 0 prfHadron1 : (Wiki.Observations.StandardModel.auditFullStandardModelCatalogProof = True)
 prfHadron1 = Refl
@@ -39,6 +50,11 @@ main = do
   putStrLn "========================================================"
   putStrLn "  IDRIS 2 HARD HADRON ALGEBRA WIKI VERIFICATION SUITE"
   putStrLn "========================================================"
+  putStrLn "0. Compile-Time Elaborator Reflection Audits (Rule 01):"
+  putStrLn "   - Color-Singlet Neutrality (9+9+9 = 27): INJECTED & VALID (Refl) ✅"
+  putStrLn "   - Baryon Confinement Bound (27 <= 54): INJECTED & VALID (Refl) ✅"
+  putStrLn "   - Triple-Alpha Fusion (3*4 = 12): INJECTED & VALID (Refl) ✅"
+  putStrLn ""
   putStrLn "1. Hadron Quark Multiset Confinement & Gauge Vertices:"
   if prop_standardModelCatalogValid && prop_hadronSingletBalanceValid &&
      Wiki.Observations.QuarkHadronAlgebra.auditQuarkHadronAlgebraProof &&
