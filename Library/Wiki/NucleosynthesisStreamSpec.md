@@ -11,7 +11,7 @@ import Data.List
 import Data.Fuel
 import Core
 import Stage1.Order.Preorder
-import Hadron
+import NuclearMatter
 import Stage0.OnSeq.FusedStream
 
 %default total

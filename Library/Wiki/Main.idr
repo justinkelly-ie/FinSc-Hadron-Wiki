@@ -2,7 +2,7 @@ module Wiki.Main
 
 import System
 import Core
-import Hadron
+import NuclearMatter
 import Language.Reflection
 import Wiki.HadronScaleTransformSpec
 import Wiki.NucleosynthesisStreamSpec

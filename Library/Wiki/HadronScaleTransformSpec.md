@@ -32,7 +32,7 @@ Subatomic quark states contract into hadronic nucleons via structure-preserving 
 module Wiki.HadronScaleTransformSpec
 
 import Core
-import Transform
+import PhaseUnfolding
 import Stage1.ScaleTransform
 import Wiki.Observations.HadronicConfinement
 import Wiki.Observations.StandardModel
