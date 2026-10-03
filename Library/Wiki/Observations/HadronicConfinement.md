@@ -21,40 +21,13 @@ import Stage0.UniverseState
 import Stage0.Multiset
 import Stage1.UnixelFraction
 import Stage1.MaxelTransform
+import Stage1.FourGeometries
 import Data.Vect
 import Data.Fin
 
 %default total
 
-||| The 3 fundamental QCD color charge sectors in Chromogeometry:
-||| - RedColor   (Hyperbolic / Timelike flux)
-||| - GreenColor (Parabolic / Lightlike null transport)
-||| - BlueColor  (Elliptic / Spacelike confinement canvas)
-public export
-data ColorCharge = RedColor | GreenColor | BlueColor
 
-public export
-Eq ColorCharge where
-  RedColor   == RedColor   = True
-  GreenColor == GreenColor = True
-  BlueColor  == BlueColor  = True
-  _          == _          = False
-
-public export
-Show ColorCharge where
-  show RedColor   = "Red"
-  show GreenColor = "Green"
-  show BlueColor  = "Blue"
-
-||| Classifies each cell index in Fin 27 into its exact QCD Color Sector.
-public export
-cellColorSector : Fin 27 -> ColorCharge
-cellColorSector idx =
-  let c = fin27ToCoord idx
-  in case coordZ c of
-       Bit3MinusOne => RedColor
-       Bit3Zero     => GreenColor
-       Bit3PlusOne  => BlueColor
 
 public export
 tabulate27 : (Fin 27 -> a) -> Vect 27 a
@@ -138,17 +111,4 @@ export
 %macro
 auditHadronSingletBalance : Elab (Wiki.Observations.HadronicConfinement.auditHadronSingletBalanceProof = True)
 auditHadronSingletBalance = pure Refl
-
-public export
-ScaleTransform ColorCharge Nat where
-  scaleTransform RedColor   = 1
-  scaleTransform GreenColor = 2
-  scaleTransform BlueColor  = 3
-
-public export
-InvertibleScaleTransform ColorCharge Nat where
-  invertScaleTransform Z = RedColor
-  invertScaleTransform (S Z) = RedColor
-  invertScaleTransform (S (S Z)) = GreenColor
-  invertScaleTransform (S (S (S _))) = BlueColor
 ```

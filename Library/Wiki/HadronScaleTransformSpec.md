@@ -43,29 +43,29 @@ import public QuickCheck
 
 ||| Observable quantum projection for color charges:
 public export
-colorToNat : Wiki.Observations.HadronicConfinement.ColorCharge -> Nat
+colorToNat : ColorCharge -> Nat
 colorToNat RedColor   = 1
 colorToNat GreenColor = 2
 colorToNat BlueColor  = 3
 
 ||| 1. Scale Transform Color Charge Positivity: T(c) > 0
 public export
-prop_scalePreservesColor : Wiki.Observations.HadronicConfinement.ColorCharge -> Bool
+prop_scalePreservesColor : ColorCharge -> Bool
 prop_scalePreservesColor c =
   let z : Nat = scaleTransform c
   in z > 0
 
 ||| 2. Invert Scale Adjunction Inversion: T^-1(T(c)) == c
 public export
-prop_invertScaleAdjunction : Wiki.Observations.HadronicConfinement.ColorCharge -> Bool
+prop_invertScaleAdjunction : ColorCharge -> Bool
 prop_invertScaleAdjunction c =
   let z : Nat = scaleTransform c
-      c' : Wiki.Observations.HadronicConfinement.ColorCharge = invertScaleTransform z
+      c' : ColorCharge = invertScaleTransform z
   in c' == c
 
 ||| 3. Observable Preservation Homomorphism: T(c) == colorToNat(c)
 public export
-prop_observablePreserved : Wiki.Observations.HadronicConfinement.ColorCharge -> Bool
+prop_observablePreserved : ColorCharge -> Bool
 prop_observablePreserved c =
   let z : Nat = scaleTransform c
   in z == colorToNat c
