@@ -36,6 +36,9 @@ prfAuditBaryonConfinementBound = auditBaryonConfinementBound
 0 prfAuditTripleAlphaFusion : Reflect.NuclearAuditor.auditTripleAlphaFusionProof = True
 prfAuditTripleAlphaFusion = auditTripleAlphaFusion
 
+0 prfAuditNuclearReactionConservation : Reflect.NuclearAuditor.auditNuclearReactionConservationProofExport = True
+prfAuditNuclearReactionConservation = auditNuclearReactionConservation
+
 0 prfHadron1 : (Wiki.Observations.StandardModel.auditFullStandardModelCatalogProof = True)
 prfHadron1 = Refl
 
@@ -54,6 +57,7 @@ main = do
   putStrLn "   - Color-Singlet Neutrality (9+9+9 = 27): INJECTED & VALID (Refl) ✅"
   putStrLn "   - Baryon Confinement Bound (27 <= 54): INJECTED & VALID (Refl) ✅"
   putStrLn "   - Triple-Alpha Fusion (3*4 = 12): INJECTED & VALID (Refl) ✅"
+  putStrLn "   - Universal Reaction Conservation (ΔB = 0, ΔQ = 0): INJECTED & VALID (Refl) ✅"
   putStrLn ""
   putStrLn "1. Hadron Quark Multiset Confinement & Gauge Vertices:"
   if prop_standardModelCatalogValid && prop_hadronSingletBalanceValid &&
