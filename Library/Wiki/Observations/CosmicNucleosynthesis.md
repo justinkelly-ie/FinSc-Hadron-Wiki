@@ -13,6 +13,7 @@ module Wiki.Observations.CosmicNucleosynthesis
 
 import Stage0.BoxInt
 import Stage0.Multiset
+import Stage0.OnSeq.FusedStream
 import Stage1.VexelMaxel
 import Stage1.UnixelFraction
 import Wiki.Observations.HadronicConfinement
@@ -70,6 +71,11 @@ fuseDeuteron p n = addBoxel p n
 public export
 fuseLithium7 : List HadronBoxel -> Boxel
 fuseLithium7 nucleons = foldl addBoxel (MkBoxel []) nucleons
+
+||| Fuses HadronBoxels into a unified nucleus Boxel via deforested streaming fold.
+public export
+fuseLithium7Stream : FusedStream HadronBoxel -> Boxel
+fuseLithium7Stream stream = foldStream addBoxel (MkBoxel []) stream
 
 ------------------------------------------------------------------------
 -- 3. FORMAL INVARIANT AUDIT PROOFS

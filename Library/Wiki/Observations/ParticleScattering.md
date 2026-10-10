@@ -58,7 +58,7 @@ record ScatteringEvent2To2 where
 
 ||| QED Lepton Pair Annihilation to Heavy Leptons: e+ + e- -> mu+ + mu-.
 public export
-qedLeptonScatteringVertex : StandardModelParticle -> StandardModelParticle -> Maybe (List StandardModelParticle)
+qedLeptonScatteringVertex : StandardModelParticle -> StandardModelParticle -> Maybe (Vect 2 StandardModelParticle)
 qedLeptonScatteringVertex p1 p2 =
   case (p1, p2) of
     (SMPFermion LepE, SMPFermion AntiLepE) => Just [SMPFermion LepMu, SMPFermion AntiLepMu]
@@ -66,7 +66,7 @@ qedLeptonScatteringVertex p1 p2 =
 
 ||| QCD Quark-Antiquark Annihilation to Gluon Pairs: q + q_bar -> g + g.
 public export
-qcdQuarkAnnihilationVertex : StandardModelParticle -> StandardModelParticle -> Maybe (List StandardModelParticle)
+qcdQuarkAnnihilationVertex : StandardModelParticle -> StandardModelParticle -> Maybe (Vect 2 StandardModelParticle)
 qcdQuarkAnnihilationVertex p1 p2 =
   case (p1, p2) of
     (SMPFermion QuarkU, SMPFermion AntiQuarkU) => Just [SMPBoson GluonR, SMPBoson GluonR]
@@ -75,7 +75,7 @@ qcdQuarkAnnihilationVertex p1 p2 =
 
 ||| Weak Boson Vector Fusion to Higgs Scalar & Photon: W+ + W- -> H0 + gamma.
 public export
-weakVectorBosonFusionVertex : StandardModelParticle -> StandardModelParticle -> Maybe (List StandardModelParticle)
+weakVectorBosonFusionVertex : StandardModelParticle -> StandardModelParticle -> Maybe (Vect 2 StandardModelParticle)
 weakVectorBosonFusionVertex p1 p2 =
   case (p1, p2) of
     (SMPBoson WPlus, SMPBoson WMinus) => Just [SMPBoson Higgs0, SMPBoson Photon]

@@ -13,6 +13,7 @@ module Wiki.Observations.StellarNuclei
 
 import Stage0.BoxInt
 import Stage0.Multiset
+import Stage0.OnSeq.FusedStream
 import Stage1.VexelMaxel
 import Stage1.UnixelFraction
 import Wiki.Observations.HadronicConfinement
@@ -73,10 +74,20 @@ public export
 fuseNeon20 : List Boxel -> Boxel
 fuseNeon20 alphaCores = foldl addBoxel (MkBoxel []) alphaCores
 
+||| Fuses Alpha Cores into a Neon-20 nucleus via deforested streaming fold.
+public export
+fuseNeon20Stream : FusedStream Boxel -> Boxel
+fuseNeon20Stream stream = foldStream addBoxel (MkBoxel []) stream
+
 ||| Fuses 56 Nucleons into an Iron-56 peak binding nucleus (1512 mass tokens).
 public export
 fuseIron56Tokens : List HadronBoxel -> BoxInt
 fuseIron56Tokens nucleons = foldl (+) (intToBoxInt 0) (map totalBoxelWeight nucleons)
+
+||| Fuses Nucleons into an Iron-56 peak binding nucleus via deforested streaming fold.
+public export
+fuseIron56TokensStream : FusedStream HadronBoxel -> BoxInt
+fuseIron56TokensStream stream = foldStream (\acc, b => addBox acc (totalBoxelWeight b)) (intToBoxInt 0) stream
 
 ------------------------------------------------------------------------
 -- 3. FORMAL AUDIT PROOFS

@@ -13,9 +13,11 @@ module Wiki.Observations.HadronizationEngine
 
 import Stage0.BoxInt
 import Stage0.Multiset
+import Stage0.OnSeq.FusedStream
 import Wiki.Observations.StandardModel
 import Data.Vect
 import Data.List
+import Data.Fuel
 
 %default total
 
@@ -42,8 +44,23 @@ record HadronizedJetState where
   qgpPhase : QGPPhase
 
 ------------------------------------------------------------------------
--- 2. HADRONIZATION AUTOMATON
+-- 2. HADRONIZATION AUTOMATON & STREAMING TRANSDUCER
 ------------------------------------------------------------------------
+
+||| Top-level state step function for QGP jet fragmentation.
+public export
+fragmentQGPJetStep : (s -> Step s StandardModelParticle) -> (s, Maybe StandardModelParticle) -> Step (s, Maybe StandardModelParticle) StandardModelParticle
+fragmentQGPJetStep step (st, Just p) = Yield p (st, Nothing)
+fragmentQGPJetStep step (st, Nothing) = case step st of
+  Done => Done
+  Skip st' => Skip (st', Nothing)
+  Yield (SMPBoson GluonR) st' => Yield (SMPFermion QuarkU) (st', Just (SMPFermion AntiQuarkU))
+  Yield p st' => Yield p (st', Nothing)
+
+||| De-forested QGP jet fragmentation stream transducer: expands gluons into quark-antiquark pairs.
+public export
+fragmentQGPJetStream : FusedStream StandardModelParticle -> FusedStream StandardModelParticle
+fragmentQGPJetStream (MkStream step seed) = MkStream (fragmentQGPJetStep step) (seed, Nothing)
 
 ||| Fragments a Quark-Gluon Plasma jet into color-singlet hadrons.
 public export

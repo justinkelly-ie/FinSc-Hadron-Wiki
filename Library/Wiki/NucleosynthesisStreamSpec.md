@@ -35,17 +35,11 @@ record VerifiedColorChargeState where
   blueQuarks  : Nat
   0 neutralityPrf : NucleosynthesisColorNeutralityWitness redQuarks greenQuarks blueQuarks
 
-||| $O(1)$ allocation deforested hadronization stream transducer using fusedHylomorphism
-public export covering
+||| $O(1)$ allocation deforested hadronization stream transducer using foldStreamNat
+public export
 fusedNucleosynthesisStream : Fuel -> List (Nat, Nat) -> Nat
-fusedNucleosynthesisStream f items =
-  fusedHylomorphism f
-    (\st => case st of
-              [] => Done
-              (q1, q2) :: rest => Yield (q1 + q2) rest)
-    (\val, acc => val + acc)
-    0
-    items
+fusedNucleosynthesisStream _ items =
+  foldStreamNat (length items) (\acc, (q1, q2) => acc + q1 + q2) 0 (stream items)
 
 ||| Property 1: Seed Alpha Cluster Stream Stability Filter
 public export
