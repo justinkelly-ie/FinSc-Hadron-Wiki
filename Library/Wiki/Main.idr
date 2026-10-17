@@ -45,6 +45,9 @@ prfAuditNuclearBindingDepPoly = auditNuclearBindingDepPoly
 0 prfAuditGellMannOkuboDecuplet : Reflect.NuclearAuditor.auditGellMannOkuboDecupletProofExport = True
 prfAuditGellMannOkuboDecuplet = auditGellMannOkuboDecuplet
 
+0 prfAuditWignerAlphaCluster : Reflect.NuclearAuditor.auditWignerAlphaClusterProofExport = True
+prfAuditWignerAlphaCluster = auditWignerAlphaCluster
+
 0 prfHadron1 : (Wiki.Observations.StandardModel.auditFullStandardModelCatalogProof = True)
 prfHadron1 = Refl
 
@@ -66,6 +69,7 @@ main = do
   putStrLn "   - Universal Reaction Conservation (ΔB = 0, ΔQ = 0): INJECTED & VALID (Refl) ✅"
   putStrLn "   - Weizsäcker Liquid-Drop Coulomb & Asymmetry DepPoly: INJECTED & VALID (Refl) ✅"
   putStrLn "   - Gell-Mann–Okubo Hadron Mass Decuplet DepPoly: INJECTED & VALID (Refl) ✅"
+  putStrLn "   - Wigner SU(4) Spin-Isospin & Certified Alpha Core (2p+2n=4): INJECTED & VALID (Refl) ✅"
   putStrLn ""
   putStrLn "1. Hadron Quark Multiset Confinement & Gauge Vertices:"
   if prop_standardModelCatalogValid && prop_hadronSingletBalanceValid &&
