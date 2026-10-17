@@ -13,6 +13,7 @@ import Core
 import Stage1.Order.Preorder
 import NuclearMatter
 import Stage0.OnSeq.FusedStream
+import Stage0.StructuralFuel
 
 %default total
 
@@ -35,11 +36,11 @@ record VerifiedColorChargeState where
   blueQuarks  : Nat
   0 neutralityPrf : NucleosynthesisColorNeutralityWitness redQuarks greenQuarks blueQuarks
 
-||| $O(1)$ allocation deforested hadronization stream transducer using foldStreamNat
+||| $O(1)$ allocation deforested hadronization stream transducer using foldStreamNat and model-indexed GohFuel
 public export
-fusedNucleosynthesisStream : Fuel -> List (Nat, Nat) -> Nat
-fusedNucleosynthesisStream _ items =
-  foldStreamNat (length items) (\acc, (q1, q2) => acc + q1 + q2) 0 (stream items)
+fusedNucleosynthesisStream : GohFuel cap -> List (Nat, Nat) -> Nat
+fusedNucleosynthesisStream fuel items =
+  foldStreamNat (gohSteps fuel) (\acc, (q1, q2) => acc + q1 + q2) 0 (stream items)
 
 ||| Property 1: Seed Alpha Cluster Stream Stability Filter
 public export
@@ -49,7 +50,7 @@ prop_alphaClusterStreamStability =
     a = seedAlphaClusterEpoch4
     strm = streamAlphaClusters [a]
     filtered = fusedFilterStableAlpha strm
-    res = runFueledStream (limit 10) filtered
+    res = runFueledStream (limit (gohSteps ellipticGohFuelModel)) filtered
   in
     length res == 1
 
@@ -60,7 +61,7 @@ prop_tripleAlphaFusionFluxStream =
   let
     a = seedAlphaClusterEpoch4
     strm = unfoldAlphaFusionStream [a]
-    res = runFueledStream (limit 10) strm
+    res = runFueledStream (limit (gohSteps ellipticGohFuelModel)) strm
   in
     res == [intToBoxInt 324]
 
@@ -70,6 +71,6 @@ auditNucleosynthesisStreamProof : IO Bool
 auditNucleosynthesisStreamProof = do
   let p1 = prop_alphaClusterStreamStability
   let p2 = prop_tripleAlphaFusionFluxStream
-  let streamSum = fusedNucleosynthesisStream (limit 100) [(108, 108), (108, 0)]
+  let streamSum = fusedNucleosynthesisStream ellipticGohFuelModel [(108, 108), (108, 0)]
   pure (p1 && p2 && streamSum == 324)
 ```

@@ -39,6 +39,12 @@ prfAuditTripleAlphaFusion = auditTripleAlphaFusion
 0 prfAuditNuclearReactionConservation : Reflect.NuclearAuditor.auditNuclearReactionConservationProofExport = True
 prfAuditNuclearReactionConservation = auditNuclearReactionConservation
 
+0 prfAuditNuclearBindingDepPoly : Reflect.NuclearAuditor.auditNuclearBindingDepPolyProofExport = True
+prfAuditNuclearBindingDepPoly = auditNuclearBindingDepPoly
+
+0 prfAuditGellMannOkuboDecuplet : Reflect.NuclearAuditor.auditGellMannOkuboDecupletProofExport = True
+prfAuditGellMannOkuboDecuplet = auditGellMannOkuboDecuplet
+
 0 prfHadron1 : (Wiki.Observations.StandardModel.auditFullStandardModelCatalogProof = True)
 prfHadron1 = Refl
 
@@ -58,6 +64,8 @@ main = do
   putStrLn "   - Baryon Confinement Bound (27 <= 54): INJECTED & VALID (Refl) ✅"
   putStrLn "   - Triple-Alpha Fusion (3*4 = 12): INJECTED & VALID (Refl) ✅"
   putStrLn "   - Universal Reaction Conservation (ΔB = 0, ΔQ = 0): INJECTED & VALID (Refl) ✅"
+  putStrLn "   - Weizsäcker Liquid-Drop Coulomb & Asymmetry DepPoly: INJECTED & VALID (Refl) ✅"
+  putStrLn "   - Gell-Mann–Okubo Hadron Mass Decuplet DepPoly: INJECTED & VALID (Refl) ✅"
   putStrLn ""
   putStrLn "1. Hadron Quark Multiset Confinement & Gauge Vertices:"
   if prop_standardModelCatalogValid && prop_hadronSingletBalanceValid &&
