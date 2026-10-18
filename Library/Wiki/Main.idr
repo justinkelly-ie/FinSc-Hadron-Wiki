@@ -57,6 +57,9 @@ prfHadron2 = Refl
 0 prfHadron3 : (Wiki.Observations.TypeIndexedMultiset.auditTypeIndexedMultisetProof = True)
 prfHadron3 = Refl
 
+0 prfQuarkAnnihilationPath : (Stage1.Hadron.QuarkHadronAlgebra.auditQuarkAnnihilationPath = True)
+prfQuarkAnnihilationPath = Refl
+
 main : IO ()
 main = do
   putStrLn "========================================================"
@@ -74,6 +77,7 @@ main = do
   putStrLn "1. Hadron Quark Multiset Confinement & Gauge Vertices:"
   if prop_standardModelCatalogValid && prop_hadronSingletBalanceValid &&
      Wiki.Observations.QuarkHadronAlgebra.auditQuarkHadronAlgebraProof &&
+     Stage1.Hadron.QuarkHadronAlgebra.auditQuarkAnnihilationPath &&
      Wiki.Observations.MesonAlgebra.auditMesonAlgebraProof &&
      Wiki.Observations.HeavyMesonAlgebra.auditHeavyMesonAlgebraProof &&
      Wiki.Observations.HyperonAlgebra.auditHyperonAlgebraProof &&
