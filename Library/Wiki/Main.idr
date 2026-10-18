@@ -60,6 +60,9 @@ prfHadron3 = Refl
 0 prfQuarkAnnihilationPath : (Stage1.Hadron.QuarkHadronAlgebra.auditQuarkAnnihilationPath = True)
 prfQuarkAnnihilationPath = Refl
 
+0 prfTripleAlphaHomotopyPath : (Stage1.Hadron.QuarkHadronAlgebra.auditTripleAlphaHomotopyPath = True)
+prfTripleAlphaHomotopyPath = Refl
+
 main : IO ()
 main = do
   putStrLn "========================================================"
@@ -78,6 +81,7 @@ main = do
   if prop_standardModelCatalogValid && prop_hadronSingletBalanceValid &&
      Wiki.Observations.QuarkHadronAlgebra.auditQuarkHadronAlgebraProof &&
      Stage1.Hadron.QuarkHadronAlgebra.auditQuarkAnnihilationPath &&
+     Stage1.Hadron.QuarkHadronAlgebra.auditTripleAlphaHomotopyPath &&
      Wiki.Observations.MesonAlgebra.auditMesonAlgebraProof &&
      Wiki.Observations.HeavyMesonAlgebra.auditHeavyMesonAlgebraProof &&
      Wiki.Observations.HyperonAlgebra.auditHyperonAlgebraProof &&
