@@ -95,8 +95,8 @@ observeMesonMassTokens m = totalVexelMass m
 %inline
 public export
 isMesonColorNeutral : MesonVexel -> Bool
-isMesonColorNeutral (MkVexel terms) =
-  case terms of
+isMesonColorNeutral m =
+  case vexelTerms m of
     [(s1, w1), (s2, w2)] => w1 == Stage0.BoxInt.intToBoxInt 9 && w2 == Stage0.BoxInt.intToBoxInt 9
     _ => False
 

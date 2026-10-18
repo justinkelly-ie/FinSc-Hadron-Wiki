@@ -86,7 +86,6 @@ makeUpsilonBottomoniumVexel =
 %inline
 public export
 observeHeavyMesonMassTokens : MesonVexel -> Stage0.BoxInt.BoxInt
-observeHeavyMesonMassTokens (MkVexel [(u1, MkBoxInt w1), (u2, MkBoxInt w2)]) = MkBoxInt (w1 + w2)
 observeHeavyMesonMassTokens m = totalVexelMass m
 
 ||| Audits Heavy Meson Mass Token Conservation.

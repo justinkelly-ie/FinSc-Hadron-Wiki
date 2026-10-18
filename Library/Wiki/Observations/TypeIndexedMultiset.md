@@ -123,8 +123,8 @@ public export
 record RefinedQuark (spec : QuarkSpec) (col : ColorSector) where
   constructor MkRefinedQuark
   vexelCarrier : QuarkVexel
-  0 tokenProof : (case vexelCarrier of
-                    MkVexel [(MkUnixel c, w)] => c == colorToNat col && w == Stage0.BoxInt.intToBoxInt 9
+  0 tokenProof : (case vexelTerms vexelCarrier of
+                    [(MkUnixel c, w)] => c == colorToNat col && w == Stage0.BoxInt.intToBoxInt 9
                     _ => False) = True
 
 ||| Refined Hadron: 3D Boxel (27 mass tokens) with verified color neutrality.
