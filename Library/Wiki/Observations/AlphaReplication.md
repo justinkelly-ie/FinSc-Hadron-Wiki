@@ -79,8 +79,7 @@ isAlphaStable alpha = isNuclearClusterStable alpha
 ||| Translates all voxel coordinates in a Boxel by a spatial offset (dx, dy, dz).
 public export
 embedNucleonBoxel : (dx : Nat) -> (dy : Nat) -> (dz : Nat) -> Boxel -> Boxel
-embedNucleonBoxel dx dy dz (MkBoxel voxs) =
-  MkBoxel (map (\(v, w) => (mkVoxel (voxelX v + dx) (voxelY v + dy) (voxelZ v + dz), w)) voxs)
+embedNucleonBoxel dx dy dz b = translateBoxel (mkVoxel dx dy dz) b
 
 ||| Full 108-voxel Alpha Particle (4He) represented as a single unified 3D Boxel multiset.
 public export
