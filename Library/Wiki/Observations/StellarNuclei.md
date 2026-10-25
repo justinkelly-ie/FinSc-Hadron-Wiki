@@ -14,7 +14,7 @@ module Wiki.Observations.StellarNuclei
 import Stage0.BoxInt
 import Stage0.Multiset
 import Stage0.OnSeq.FusedStream
-import Stage1.VexelMaxel
+import Stage1.Carrier.Boxel
 import Stage1.UnixelFraction
 import Wiki.Observations.HadronicConfinement
 import Wiki.Observations.QuarkHadronAlgebra

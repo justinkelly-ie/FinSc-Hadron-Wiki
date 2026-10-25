@@ -12,7 +12,6 @@ In the early Universe, high-energy plasma composed of ionized protons ($p^+$) an
 module Wiki.Observations.PlasmaRecombination
 
 import Stage0.BoxInt
-import Stage1.VexelMaxel
 import Wiki.Observations.HadronicConfinement
 import Data.Vect
 

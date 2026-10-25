@@ -14,7 +14,8 @@ module Wiki.Observations.HadronicConfinement
 import Language.Reflection
 import Stage0.BoxInt
 import Stage1.ScaleTransform
-import Stage1.VexelMaxel
+import Stage1.Carrier.Boxel
+import Stage1.Carrier.BalanceArray
 import Stage1.LinAlgebra.TernaryClassifier
 import Stage0.LatticeTopology
 import Stage0.UniverseState

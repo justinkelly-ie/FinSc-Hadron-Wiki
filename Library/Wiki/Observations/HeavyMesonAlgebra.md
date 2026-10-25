@@ -13,7 +13,8 @@ module Wiki.Observations.HeavyMesonAlgebra
 
 import Stage0.BoxInt
 import Stage0.Multiset
-import Stage1.VexelMaxel
+import Stage1.Carrier.Vexel
+import Stage1.Basis.Coordinate
 import Stage1.UnixelFraction
 import Core
 import Stage1.ExclusionPrinciple

@@ -12,7 +12,10 @@ An Alpha particle (${}^4\text{He}$) consists of 4 bonded nucleons (2 protons + 2
 module Wiki.Observations.AlphaReplication
 
 import Stage0.BoxInt
-import Stage1.VexelMaxel
+import Stage1.Carrier.Vexel
+import Stage1.Carrier.Boxel
+import Stage1.Carrier.BalanceArray
+import Stage1.Basis.Coordinate
 import Stage0.LatticeTopology
 import Wiki.Observations.HadronicConfinement
 import Stage0.UniverseState
@@ -77,7 +80,7 @@ isAlphaStable alpha = isNuclearClusterStable alpha
 public export
 embedNucleonBoxel : (dx : Nat) -> (dy : Nat) -> (dz : Nat) -> Boxel -> Boxel
 embedNucleonBoxel dx dy dz (MkBoxel voxs) =
-  MkBoxel (map (\(MkVoxel x y z, w) => (MkVoxel (x + dx) (y + dy) (z + dz), w)) voxs)
+  MkBoxel (map (\(v, w) => (mkVoxel (voxelX v + dx) (voxelY v + dy) (voxelZ v + dz), w)) voxs)
 
 ||| Full 108-voxel Alpha Particle (4He) represented as a single unified 3D Boxel multiset.
 public export

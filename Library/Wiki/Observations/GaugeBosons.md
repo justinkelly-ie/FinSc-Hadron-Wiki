@@ -13,7 +13,9 @@ module Wiki.Observations.GaugeBosons
 
 import Stage0.BoxInt
 import Stage0.Multiset
-import Stage1.VexelMaxel
+import Stage1.Carrier.Maxel
+import Stage1.Carrier.Vexel
+import Stage1.Basis.Coordinate
 import Stage1.UnixelFraction
 import Core
 import Stage1.ExclusionPrinciple
@@ -48,24 +50,24 @@ Eq GluonIndex where
 ||| A Gluon is an SU(3) color-exchange Maxel matrix [color_in, color_out].
 public export
 GluonMaxel : Type
-GluonMaxel = Stage1.VexelMaxel.Maxel
+GluonMaxel = Maxel
 
 ||| Constructs the Maxel matrix for a given Gluon octet component.
 public export
 makeGluonMaxel : GluonIndex -> GluonMaxel
-makeGluonMaxel G1_RedAntiGreen  = Stage1.VexelMaxel.MkMaxel [(MkPixel 1 2, Stage0.BoxInt.intToBoxInt 1)]
-makeGluonMaxel G2_RedAntiBlue   = Stage1.VexelMaxel.MkMaxel [(MkPixel 1 3, Stage0.BoxInt.intToBoxInt 1)]
-makeGluonMaxel G3_GreenAntiRed  = Stage1.VexelMaxel.MkMaxel [(MkPixel 2 1, Stage0.BoxInt.intToBoxInt 1)]
-makeGluonMaxel G4_GreenAntiBlue = Stage1.VexelMaxel.MkMaxel [(MkPixel 2 3, Stage0.BoxInt.intToBoxInt 1)]
-makeGluonMaxel G5_BlueAntiRed   = Stage1.VexelMaxel.MkMaxel [(MkPixel 3 1, Stage0.BoxInt.intToBoxInt 1)]
-makeGluonMaxel G6_BlueAntiGreen = Stage1.VexelMaxel.MkMaxel [(MkPixel 3 2, Stage0.BoxInt.intToBoxInt 1)]
-makeGluonMaxel G7_NeutralDiag1  = Stage1.VexelMaxel.MkMaxel [(MkPixel 1 1, Stage0.BoxInt.intToBoxInt 1), (MkPixel 2 2, Stage0.BoxInt.intToBoxInt (-1))]
-makeGluonMaxel G8_NeutralDiag2  = Stage1.VexelMaxel.MkMaxel [(MkPixel 1 1, Stage0.BoxInt.intToBoxInt 1), (MkPixel 2 2, Stage0.BoxInt.intToBoxInt 1), (MkPixel 3 3, Stage0.BoxInt.intToBoxInt (-2))]
+makeGluonMaxel G1_RedAntiGreen  = MkMaxel [(MkPixel 1 2, Stage0.BoxInt.intToBoxInt 1)]
+makeGluonMaxel G2_RedAntiBlue   = MkMaxel [(MkPixel 1 3, Stage0.BoxInt.intToBoxInt 1)]
+makeGluonMaxel G3_GreenAntiRed  = MkMaxel [(MkPixel 2 1, Stage0.BoxInt.intToBoxInt 1)]
+makeGluonMaxel G4_GreenAntiBlue = MkMaxel [(MkPixel 2 3, Stage0.BoxInt.intToBoxInt 1)]
+makeGluonMaxel G5_BlueAntiRed   = MkMaxel [(MkPixel 3 1, Stage0.BoxInt.intToBoxInt 1)]
+makeGluonMaxel G6_BlueAntiGreen = MkMaxel [(MkPixel 3 2, Stage0.BoxInt.intToBoxInt 1)]
+makeGluonMaxel G7_NeutralDiag1  = MkMaxel [(MkPixel 1 1, Stage0.BoxInt.intToBoxInt 1), (MkPixel 2 2, Stage0.BoxInt.intToBoxInt (-1))]
+makeGluonMaxel G8_NeutralDiag2  = MkMaxel [(MkPixel 1 1, Stage0.BoxInt.intToBoxInt 1), (MkPixel 2 2, Stage0.BoxInt.intToBoxInt 1), (MkPixel 3 3, Stage0.BoxInt.intToBoxInt (-2))]
 
 ||| Applies a Gluon Maxel color exchange operator to a Quark Vexel.
 public export
 actGluonOnQuark : GluonMaxel -> QuarkVexel -> QuarkVexel
-actGluonOnQuark g q = Stage1.VexelMaxel.actMaxelVexel g q
+actGluonOnQuark g q = actMaxelVexel g q
 
 ------------------------------------------------------------------------
 -- 2. ELECTROWEAK BOSONS & BETA DECAY OPERATOR
