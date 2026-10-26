@@ -14,7 +14,7 @@ module Wiki.Observations.CosmicNucleosynthesis
 import Stage0.BoxInt
 import Stage0.Multiset
 import Stage0.OnSeq.FusedStream
-import Stage1.Carrier.Boxel
+import Stage1.Basis.Coordinate
 import Stage1.UnixelFraction
 import Wiki.Observations.HadronicConfinement
 import Wiki.Observations.QuarkHadronAlgebra
@@ -65,17 +65,17 @@ nucleusMassTokens spec = intToBoxInt (cast (nucleusNucleonCount spec * 27))
 ||| Fuses 1 Proton (27) and 1 Neutron (27) into a Deuteron 2H nucleus (54 tokens).
 public export
 fuseDeuteron : HadronBoxel -> HadronBoxel -> Boxel
-fuseDeuteron p n = addBoxel p n
+fuseDeuteron p n = addCellMultiset p n
 
 ||| Fuses 3 Protons (81) and 4 Neutrons (108) into a Lithium-7 nucleus (189 tokens).
 public export
 fuseLithium7 : List HadronBoxel -> Boxel
-fuseLithium7 nucleons = foldl addBoxel (MkBoxel []) nucleons
+fuseLithium7 nucleons = foldl addCellMultiset emptyCellMultiset nucleons
 
 ||| Fuses HadronBoxels into a unified nucleus Boxel via deforested streaming fold.
 public export
 fuseLithium7Stream : FusedStream HadronBoxel -> Boxel
-fuseLithium7Stream stream = foldStream addBoxel (MkBoxel []) stream
+fuseLithium7Stream stream = foldStream addCellMultiset emptyCellMultiset stream
 
 ------------------------------------------------------------------------
 -- 3. FORMAL INVARIANT AUDIT PROOFS

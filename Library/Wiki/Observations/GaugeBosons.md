@@ -13,8 +13,6 @@ module Wiki.Observations.GaugeBosons
 
 import Stage0.BoxInt
 import Stage0.Multiset
-import Stage1.Carrier.Maxel
-import Stage1.Carrier.Vexel
 import Stage1.Basis.Coordinate
 import Stage1.UnixelFraction
 import Core
@@ -55,14 +53,14 @@ GluonMaxel = Maxel
 ||| Constructs the Maxel matrix for a given Gluon octet component.
 public export
 makeGluonMaxel : GluonIndex -> GluonMaxel
-makeGluonMaxel G1_RedAntiGreen  = MkMaxel [(MkPixel 1 2, Stage0.BoxInt.intToBoxInt 1)]
-makeGluonMaxel G2_RedAntiBlue   = MkMaxel [(MkPixel 1 3, Stage0.BoxInt.intToBoxInt 1)]
-makeGluonMaxel G3_GreenAntiRed  = MkMaxel [(MkPixel 2 1, Stage0.BoxInt.intToBoxInt 1)]
-makeGluonMaxel G4_GreenAntiBlue = MkMaxel [(MkPixel 2 3, Stage0.BoxInt.intToBoxInt 1)]
-makeGluonMaxel G5_BlueAntiRed   = MkMaxel [(MkPixel 3 1, Stage0.BoxInt.intToBoxInt 1)]
-makeGluonMaxel G6_BlueAntiGreen = MkMaxel [(MkPixel 3 2, Stage0.BoxInt.intToBoxInt 1)]
-makeGluonMaxel G7_NeutralDiag1  = MkMaxel [(MkPixel 1 1, Stage0.BoxInt.intToBoxInt 1), (MkPixel 2 2, Stage0.BoxInt.intToBoxInt (-1))]
-makeGluonMaxel G8_NeutralDiag2  = MkMaxel [(MkPixel 1 1, Stage0.BoxInt.intToBoxInt 1), (MkPixel 2 2, Stage0.BoxInt.intToBoxInt 1), (MkPixel 3 3, Stage0.BoxInt.intToBoxInt (-2))]
+makeGluonMaxel G1_RedAntiGreen  = singletonCell (MkPixel 1 2) (Stage0.BoxInt.intToBoxInt 1)
+makeGluonMaxel G2_RedAntiBlue   = singletonCell (MkPixel 1 3) (Stage0.BoxInt.intToBoxInt 1)
+makeGluonMaxel G3_GreenAntiRed  = singletonCell (MkPixel 2 1) (Stage0.BoxInt.intToBoxInt 1)
+makeGluonMaxel G4_GreenAntiBlue = singletonCell (MkPixel 2 3) (Stage0.BoxInt.intToBoxInt 1)
+makeGluonMaxel G5_BlueAntiRed   = singletonCell (MkPixel 3 1) (Stage0.BoxInt.intToBoxInt 1)
+makeGluonMaxel G6_BlueAntiGreen = singletonCell (MkPixel 3 2) (Stage0.BoxInt.intToBoxInt 1)
+makeGluonMaxel G7_NeutralDiag1  = singletonCell (MkPixel 1 1) (Stage0.BoxInt.intToBoxInt 1) <+> singletonCell (MkPixel 2 2) (Stage0.BoxInt.intToBoxInt (-1))
+makeGluonMaxel G8_NeutralDiag2  = singletonCell (MkPixel 1 1) (Stage0.BoxInt.intToBoxInt 1) <+> singletonCell (MkPixel 2 2) (Stage0.BoxInt.intToBoxInt 1) <+> singletonCell (MkPixel 3 3) (Stage0.BoxInt.intToBoxInt (-2))
 
 ||| Applies a Gluon Maxel color exchange operator to a Quark Vexel.
 public export
@@ -90,7 +88,7 @@ public export
 betaDecayNucleon : HadronBoxel -> (HadronBoxel, Stage0.BoxInt.BoxInt)
 betaDecayNucleon neutronBoxel =
   let protonBoxel = seedHadronBoxel
-      releasedMass = totalBoxelWeight neutronBoxel - totalBoxelWeight protonBoxel
+      releasedMass = totalCellMultisetWeight neutronBoxel - totalCellMultisetWeight protonBoxel
   in (protonBoxel, releasedMass)
 
 ------------------------------------------------------------------------

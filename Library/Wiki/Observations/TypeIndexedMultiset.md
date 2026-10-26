@@ -21,8 +21,6 @@ import Language.Reflection
 import Stage0.Singleton.Bit
 import Stage0.BoxInt
 import Stage0.Multiset
-import Stage1.Carrier.Vexel
-import Stage1.Carrier.Boxel
 import Stage1.Basis.Coordinate
 import Stage1.UnixelFraction
 import Core
@@ -220,12 +218,12 @@ observeRefinedHadronCharge NeutronSpec _ = MkUnixelFraction (Stage0.BoxInt.intTo
 ||| Observation: Total Mass Tokens of a Refined Hadron (27 tokens).
 public export
 observeRefinedHadronMass : RefinedHadron spec -> Stage0.BoxInt.BoxInt
-observeRefinedHadronMass (MkRefinedHadron carrier _) = totalBoxelWeight carrier
+observeRefinedHadronMass (MkRefinedHadron carrier _) = totalCellMultisetWeight carrier
 
 ||| Observation: Total Mass Tokens of a Refined Alpha Particle (108 tokens).
 public export
 observeRefinedAlphaMass : RefinedAlpha spec -> Stage0.BoxInt.BoxInt
-observeRefinedAlphaMass (MkRefinedAlpha carrier _) = totalBoxelWeight carrier
+observeRefinedAlphaMass (MkRefinedAlpha carrier _) = totalCellMultisetWeight carrier
 
 ||| Observation: Total Nucleon Tokens of a Refined Carbon-12 Nucleus (324 tokens).
 public export

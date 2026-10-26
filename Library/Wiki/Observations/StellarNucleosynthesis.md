@@ -12,7 +12,6 @@ Stellar interiors fuse Hydrogen and Helium into essential biochemical elements (
 module Wiki.Observations.StellarNucleosynthesis
 
 import Stage0.BoxInt
-import Stage1.Carrier.Vexel
 import Stage1.Basis.Coordinate
 import Wiki.Observations.HadronicConfinement
 import Wiki.Observations.AlphaReplication
@@ -99,10 +98,9 @@ nuclideVexel : StellarElement -> (neutrons : Nat) -> Vexel
 nuclideVexel elem n =
   let z = stellarAtomicNumber elem
       a = z + n
-  in canonicalizeVexel (MkVexel [ (MkUnixel 1, natToBoxInt z)
-                               , (MkUnixel 2, natToBoxInt n)
-                               , (MkUnixel 3, natToBoxInt a)
-                               ])
+  in canonicalizeCell (singletonCell (MkUnixel 1) (natToBoxInt z) <+>
+                       singletonCell (MkUnixel 2) (natToBoxInt n) <+>
+                       singletonCell (MkUnixel 3) (natToBoxInt a))
 
 ------------------------------------------------------------------------
 -- 2. TRIPLE-ALPHA FUSION GRAPH CONTRACTION
@@ -164,10 +162,9 @@ nuclideSi28 = nuclideVexel ElemSi 14
 
 public export
 nuclideNi56Core : Vexel
-nuclideNi56Core = canonicalizeVexel (MkVexel [ (MkUnixel 1, intToBoxInt 28)
-                                             , (MkUnixel 2, intToBoxInt 28)
-                                             , (MkUnixel 3, intToBoxInt 56)
-                                             ])
+nuclideNi56Core = canonicalizeCell (singletonCell (MkUnixel 1) (intToBoxInt 28) <+>
+                                     singletonCell (MkUnixel 2) (intToBoxInt 28) <+>
+                                     singletonCell (MkUnixel 3) (intToBoxInt 56))
 
 ||| Audits the Complete Closed Stellar Nucleosynthesis Balance Network.
 public export

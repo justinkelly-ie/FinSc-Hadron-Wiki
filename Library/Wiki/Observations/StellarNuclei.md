@@ -14,7 +14,7 @@ module Wiki.Observations.StellarNuclei
 import Stage0.BoxInt
 import Stage0.Multiset
 import Stage0.OnSeq.FusedStream
-import Stage1.Carrier.Boxel
+import Stage1.Basis.Coordinate
 import Stage1.UnixelFraction
 import Wiki.Observations.HadronicConfinement
 import Wiki.Observations.QuarkHadronAlgebra
@@ -72,22 +72,22 @@ stellarNucleusMassTokens spec = intToBoxInt (cast (stellarNucleusMassNumber spec
 ||| Fuses 5 Alpha Cores into a Neon-20 nucleus (540 mass tokens).
 public export
 fuseNeon20 : List Boxel -> Boxel
-fuseNeon20 alphaCores = foldl addBoxel (MkBoxel []) alphaCores
+fuseNeon20 alphaCores = foldl addCellMultiset emptyCellMultiset alphaCores
 
 ||| Fuses Alpha Cores into a Neon-20 nucleus via deforested streaming fold.
 public export
 fuseNeon20Stream : FusedStream Boxel -> Boxel
-fuseNeon20Stream stream = foldStream addBoxel (MkBoxel []) stream
+fuseNeon20Stream stream = foldStream addCellMultiset emptyCellMultiset stream
 
 ||| Fuses 56 Nucleons into an Iron-56 peak binding nucleus (1512 mass tokens).
 public export
 fuseIron56Tokens : List HadronBoxel -> BoxInt
-fuseIron56Tokens nucleons = foldl (+) (intToBoxInt 0) (map totalBoxelWeight nucleons)
+fuseIron56Tokens nucleons = foldl (+) (intToBoxInt 0) (map totalCellMultisetWeight nucleons)
 
 ||| Fuses Nucleons into an Iron-56 peak binding nucleus via deforested streaming fold.
 public export
 fuseIron56TokensStream : FusedStream HadronBoxel -> BoxInt
-fuseIron56TokensStream stream = foldStream (\acc, b => addBox acc (totalBoxelWeight b)) (intToBoxInt 0) stream
+fuseIron56TokensStream stream = foldStream (\acc, b => addBox acc (totalCellMultisetWeight b)) (intToBoxInt 0) stream
 
 ------------------------------------------------------------------------
 -- 3. FORMAL AUDIT PROOFS

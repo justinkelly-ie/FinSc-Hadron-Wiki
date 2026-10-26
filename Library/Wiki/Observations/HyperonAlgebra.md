@@ -13,7 +13,6 @@ module Wiki.Observations.HyperonAlgebra
 
 import Stage0.BoxInt
 import Stage0.Multiset
-import Stage1.Carrier.Boxel
 import Stage1.Basis.Coordinate
 import Stage1.UnixelFraction
 import Core
@@ -66,10 +65,9 @@ Show HyperonSpec where
 public export
 makeLambdaZeroBoxel : HadronBoxel
 makeLambdaZeroBoxel =
-  MkBoxel [ (MkVoxel 0 0 0, MkBoxInt 9)   -- Red Sector (uds)
-          , (MkVoxel 1 1 1, MkBoxInt 9)   -- Green Sector (uds)
-          , (MkVoxel 2 2 2, MkBoxInt 9)   -- Blue Sector (uds)
-          ]
+  singletonCell (MkVoxel 0 0 0) (MkBoxInt 9) <+>
+  singletonCell (MkVoxel 1 1 1) (MkBoxInt 9) <+>
+  singletonCell (MkVoxel 2 2 2) (MkBoxInt 9)
 
 ------------------------------------------------------------------------
 -- 3. OBSERVATIONS & COLOR NEUTRALITY
@@ -79,7 +77,7 @@ makeLambdaZeroBoxel =
 %inline
 public export
 observeHyperonMassTokens : HadronBoxel -> Stage0.BoxInt.BoxInt
-observeHyperonMassTokens b = totalBoxelWeight b
+observeHyperonMassTokens b = totalCellMultisetWeight b
 
 ||| Verifies SU(3) color neutrality of a Hyperon Boxel.
 %inline

@@ -13,7 +13,6 @@ module Wiki.Observations.MesonAlgebra
 
 import Stage0.BoxInt
 import Stage0.Multiset
-import Stage1.Carrier.Vexel
 import Stage1.Basis.Coordinate
 import Stage1.UnixelFraction
 import Core
@@ -62,25 +61,22 @@ Show MesonSpec where
 public export
 makePionPlusVexel : MesonVexel
 makePionPlusVexel =
-  MkVexel [ (MkUnixel 1, Stage0.BoxInt.intToBoxInt 9)  -- Up Quark (Red)
-          , (MkUnixel 2, Stage0.BoxInt.intToBoxInt 9)  -- Anti-Down Quark (Anti-Green)
-          ]
+  singletonCell (MkUnixel 1) (Stage0.BoxInt.intToBoxInt 9) <+>
+  singletonCell (MkUnixel 2) (Stage0.BoxInt.intToBoxInt 9)
 
 ||| Constructs a Pion- (d u_bar) 18-token Vexel multiset.
 public export
 makePionMinusVexel : MesonVexel
 makePionMinusVexel =
-  MkVexel [ (MkUnixel 2, Stage0.BoxInt.intToBoxInt 9)  -- Down Quark (Green)
-          , (MkUnixel 1, Stage0.BoxInt.intToBoxInt 9)  -- Anti-Up Quark (Anti-Red)
-          ]
+  singletonCell (MkUnixel 2) (Stage0.BoxInt.intToBoxInt 9) <+>
+  singletonCell (MkUnixel 1) (Stage0.BoxInt.intToBoxInt 9)
 
 ||| Constructs a Kaon+ (u s_bar) 18-token Vexel multiset.
 public export
 makeKaonPlusVexel : MesonVexel
 makeKaonPlusVexel =
-  MkVexel [ (MkUnixel 1, Stage0.BoxInt.intToBoxInt 9)  -- Up Quark
-          , (MkUnixel 3, Stage0.BoxInt.intToBoxInt 9)  -- Anti-Strange Quark
-          ]
+  singletonCell (MkUnixel 1) (Stage0.BoxInt.intToBoxInt 9) <+>
+  singletonCell (MkUnixel 3) (Stage0.BoxInt.intToBoxInt 9)
 
 ------------------------------------------------------------------------
 -- 3. OBSERVATIONS & COLOR-ANTICOLOR NEUTRALITY
@@ -90,7 +86,7 @@ makeKaonPlusVexel =
 %inline
 public export
 observeMesonMassTokens : MesonVexel -> Stage0.BoxInt.BoxInt
-observeMesonMassTokens m = totalVexelMass m
+observeMesonMassTokens m = totalCellMultisetWeight m
 
 ||| Verifies Color-Anticolor Neutrality on a Meson Vexel.
 %inline

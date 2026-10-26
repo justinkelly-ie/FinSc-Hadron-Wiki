@@ -14,7 +14,7 @@ module Wiki.Observations.HadronicConfinement
 import Language.Reflection
 import Stage0.BoxInt
 import Stage1.ScaleTransform
-import Stage1.Carrier.Boxel
+import Stage1.Basis.Coordinate
 import Stage1.Carrier.BalanceArray
 import Stage1.LinAlgebra.TernaryClassifier
 import Stage0.LatticeTopology
@@ -101,9 +101,9 @@ isHadronBoxelColorNeutral b =
   let redSlice   = sliceBoxelZ 0 b
       greenSlice = sliceBoxelZ 1 b
       blueSlice  = sliceBoxelZ 2 b
-      wRed   = totalMaxelWeight redSlice
-      wGreen = totalMaxelWeight greenSlice
-      wBlue  = totalMaxelWeight blueSlice
+      wRed   = totalCellMultisetWeight redSlice
+      wGreen = totalCellMultisetWeight greenSlice
+      wBlue  = totalCellMultisetWeight blueSlice
   in wRed == wGreen && wGreen == wBlue
 
 ||| A 4-Vexel Balance Array representing Hadronic Color Singlet Confinement:

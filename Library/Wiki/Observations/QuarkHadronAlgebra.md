@@ -13,8 +13,6 @@ module Wiki.Observations.QuarkHadronAlgebra
 
 import Stage0.BoxInt
 import Stage0.Multiset
-import Stage1.Carrier.Vexel
-import Stage1.Carrier.Boxel
 import Stage1.Basis.Coordinate
 import Stage1.UnixelFraction
 import Core
@@ -47,13 +45,13 @@ HadronBoxel = Boxel
 public export
 makeUpQuarkVexel : (colorIdx : Nat) -> QuarkVexel
 makeUpQuarkVexel col =
-  MkVexel [(MkUnixel col, Stage0.BoxInt.intToBoxInt 9)]
+  singletonCell (MkUnixel col) (Stage0.BoxInt.intToBoxInt 9)
 
 ||| Generates a pure multiset Down-Quark Vexel in a given color sector.
 public export
 makeDownQuarkVexel : (colorIdx : Nat) -> QuarkVexel
 makeDownQuarkVexel col =
-  MkVexel [(MkUnixel col, Stage0.BoxInt.intToBoxInt 9)]
+  singletonCell (MkUnixel col) (Stage0.BoxInt.intToBoxInt 9)
 
 ------------------------------------------------------------------------
 -- 3. COMBINATORS
@@ -63,7 +61,7 @@ makeDownQuarkVexel col =
 public export
 hadronizeQuarkVexels : QuarkVexel -> QuarkVexel -> QuarkVexel -> HadronBoxel
 hadronizeQuarkVexels qR qG qB =
-  let combinedVexel = addVexel qR (addVexel qG qB)
+  let combinedVexel = addCellMultiset qR (addCellMultiset qG qB)
   in seedHadronBoxel
 
 ------------------------------------------------------------------------
@@ -73,7 +71,7 @@ hadronizeQuarkVexels qR qG qB =
 ||| Observation: Total Mass Tokens of a Hadron Boxel (must equal 27).
 public export
 observeHadronMassTokens : HadronBoxel -> Stage0.BoxInt.BoxInt
-observeHadronMassTokens b = totalBoxelWeight b
+observeHadronMassTokens b = totalCellMultisetWeight b
 
 ||| Observation: Color Neutrality via Z-slice symmetry on Boxels.
 public export
@@ -84,7 +82,7 @@ observeHadronColorNeutrality b = isHadronBoxelColorNeutral b
 public export
 observeHadronBaryonFraction : HadronBoxel -> UnixelFraction
 observeHadronBaryonFraction b =
-  let w = totalBoxelWeight b
+  let w = totalCellMultisetWeight b
   in MkUnixelFraction w (MkUnixel 27)
 
 ------------------------------------------------------------------------

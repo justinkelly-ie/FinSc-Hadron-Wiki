@@ -12,10 +12,8 @@ An Alpha particle (${}^4\text{He}$) consists of 4 bonded nucleons (2 protons + 2
 module Wiki.Observations.AlphaReplication
 
 import Stage0.BoxInt
-import Stage1.Carrier.Vexel
-import Stage1.Carrier.Boxel
-import Stage1.Carrier.BalanceArray
 import Stage1.Basis.Coordinate
+import Stage1.Carrier.BalanceArray
 import Stage0.LatticeTopology
 import Wiki.Observations.HadronicConfinement
 import Stage0.UniverseState
@@ -79,7 +77,7 @@ isAlphaStable alpha = isNuclearClusterStable alpha
 ||| Translates all voxel coordinates in a Boxel by a spatial offset (dx, dy, dz).
 public export
 embedNucleonBoxel : (dx : Nat) -> (dy : Nat) -> (dz : Nat) -> Boxel -> Boxel
-embedNucleonBoxel dx dy dz b = translateBoxel (mkVoxel dx dy dz) b
+embedNucleonBoxel dx dy dz b = translateCell (mkVoxel dx dy dz) b
 
 ||| Full 108-voxel Alpha Particle (4He) represented as a single unified 3D Boxel multiset.
 public export
@@ -90,7 +88,7 @@ alphaCoreBoxel =
       n1 = embedNucleonBoxel 3 0 0 h
       n2 = embedNucleonBoxel 0 3 0 h
       n3 = embedNucleonBoxel 0 0 3 h
-  in canonicalizeBoxel (addBoxel (addBoxel (addBoxel n0 n1) n2) n3)
+  in canonicalizeCell (addCellMultiset (addCellMultiset (addCellMultiset n0 n1) n2) n3)
 
 ||| Converts an AlphaClusterState into a 108-voxel Boxel.
 public export
@@ -100,7 +98,7 @@ alphaClusterToBoxel (MkNuclearCluster [h1, h2, h3, h4]) =
       b2 = embedNucleonBoxel 3 0 0 (hadronStateToBoxel h2)
       b3 = embedNucleonBoxel 0 3 0 (hadronStateToBoxel h3)
       b4 = embedNucleonBoxel 0 0 3 (hadronStateToBoxel h4)
-  in canonicalizeBoxel (addBoxel (addBoxel (addBoxel b1 b2) b3) b4)
+  in canonicalizeCell (addCellMultiset (addCellMultiset (addCellMultiset b1 b2) b3) b4)
 alphaClusterToBoxel (MkNuclearCluster _) =
   alphaCoreBoxel
 
