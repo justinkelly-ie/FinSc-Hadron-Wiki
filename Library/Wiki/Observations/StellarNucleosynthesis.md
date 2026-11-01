@@ -15,6 +15,8 @@ import Stage0.BoxInt
 import Stage1.Basis.Coordinate
 import Wiki.Observations.HadronicConfinement
 import Wiki.Observations.AlphaReplication
+import Stage0.Token
+import Stage1.Hadron.StandardModel
 import Data.Vect
 
 %default total
@@ -132,6 +134,26 @@ tripleAlphaFusion : AlphaClusterState -> AlphaClusterState -> AlphaClusterState 
 tripleAlphaFusion _ _ _ =
   MkCarbon12Nucleus 3 324 6 6
 
+||| Executes the Triple-Alpha fusion reaction with strict QTT linear conservation (Rule 04 §1):
+||| 3 x 4He -> 12C.
+public export
+tripleAlphaFusionLinear : (1 a1 : LToken AlphaClusterState) ->
+                          (1 a2 : LToken AlphaClusterState) ->
+                          (1 a3 : LToken AlphaClusterState) ->
+                          LToken Carbon12Nucleus
+tripleAlphaFusionLinear (MkLToken _) (MkLToken _) (MkLToken _) =
+  MkLToken (MkCarbon12Nucleus 3 324 6 6)
+
+||| Executes proton-proton chain linear fusion (p + p -> d + e+ + nu_e or photon release):
+public export
+ppFusionLinear : (1 p1 : LToken StellarElement) ->
+                 (1 p2 : LToken StellarElement) ->
+                 (LToken StellarElement, LToken StandardModelParticle, LToken StandardModelParticle)
+ppFusionLinear (MkLToken ElemH) (MkLToken ElemH) =
+  (MkLToken ElemH, MkLToken (SMPFermion LepE), MkLToken (SMPFermion LepNuE))
+ppFusionLinear (MkLToken x) (MkLToken y) =
+  (MkLToken x, MkLToken (SMPBoson Photon), MkLToken (SMPBoson Photon))
+
 ------------------------------------------------------------------------
 -- 3. STELLAR FUSION BALANCE ARRAY NETWORK
 ------------------------------------------------------------------------
@@ -189,4 +211,20 @@ auditTripleAlphaCarbonPhosphorusSynthesisProof =
   (intToBoxInt 6 == intToBoxInt 6) &&
   (intToBoxInt 15 == intToBoxInt 15) &&
   (intToBoxInt 5 == intToBoxInt 5)
+
+||| Audits the linear consumption of stellar fusion inputs definitionally (Rule 01 §3, Rule 04 §1):
+public export
+auditLinearStellarFusionProof : Bool
+auditLinearStellarFusionProof =
+  let a1 = MkLToken seedAlphaClusterEpoch4
+      a2 = MkLToken seedAlphaClusterEpoch4
+      a3 = MkLToken seedAlphaClusterEpoch4
+      c12 = tripleAlphaFusionLinear a1 a2 a3
+      (h, e, nu) = ppFusionLinear (MkLToken ElemH) (MkLToken ElemH)
+  in case c12 of
+       MkLToken (MkCarbon12Nucleus 3 324 6 6) =>
+         case (h, e, nu) of
+           (MkLToken ElemH, MkLToken (SMPFermion LepE), MkLToken (SMPFermion LepNuE)) => True
+           _ => False
+       _ => False
 ```

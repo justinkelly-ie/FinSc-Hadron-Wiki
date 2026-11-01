@@ -63,6 +63,9 @@ prfQuarkAnnihilationPath = Refl
 0 prfTripleAlphaHomotopyPath : (Stage1.Hadron.QuarkHadronAlgebra.auditTripleAlphaHomotopyPath = True)
 prfTripleAlphaHomotopyPath = Refl
 
+0 prfLinearStellarFusion : (Wiki.Observations.StellarNucleosynthesis.auditLinearStellarFusionProof = True)
+prfLinearStellarFusion = Refl
+
 main : IO ()
 main = do
   putStrLn "========================================================"
@@ -92,6 +95,7 @@ main = do
      Wiki.Observations.GaugeBosons.auditGaugeBosonProof &&
      Wiki.Observations.StellarNuclei.auditStellarNucleiProof &&
      Wiki.Observations.StellarNucleosynthesis.auditCompleteStellarFusionBalanceNetworkProof &&
+     Wiki.Observations.StellarNucleosynthesis.auditLinearStellarFusionProof &&
      Wiki.Observations.CosmicNucleosynthesis.auditCosmicNucleosynthesisProof &&
      Wiki.Observations.PlasmaRecombination.auditPlasmaRecombinationDecouplingProof &&
      Wiki.Observations.AlphaReplication.auditTripleAlphaCarbonBalanceProof
