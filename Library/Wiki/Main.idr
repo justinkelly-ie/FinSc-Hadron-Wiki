@@ -114,7 +114,8 @@ main = do
      Wiki.Observations.PlasmaRecombination.auditPlasmaRecombinationDecouplingProof &&
      Wiki.Observations.AlphaReplication.auditTripleAlphaCarbonBalanceProof &&
      Reflect.NuclearAuditor.auditStellarNuclideMultisetConservationProofExport &&
-     Reflect.NuclearAuditor.auditStreamingNuclearReactorProofExport
+     Reflect.NuclearAuditor.auditStreamingNuclearReactorProofExport &&
+     Stage1.Hadron.CertifiedHadron.auditCertifiedHadronsProof
      then putStrLn "   [PASSED] Hadron Confinement & All 16 Hadronic Suites Clean!"
      else do
        putStrLn "   [FAILED] Static Invariant Audits Failed!"
