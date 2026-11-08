@@ -48,6 +48,12 @@ prfAuditGellMannOkuboDecuplet = auditGellMannOkuboDecuplet
 0 prfAuditWignerAlphaCluster : Reflect.NuclearAuditor.auditWignerAlphaClusterProofExport = True
 prfAuditWignerAlphaCluster = auditWignerAlphaCluster
 
+0 prfAuditStellarNuclideMultisetConservation : Reflect.NuclearAuditor.auditStellarNuclideMultisetConservationProofExport = True
+prfAuditStellarNuclideMultisetConservation = auditStellarNuclideMultisetConservation
+
+0 prfAuditStreamingNuclearReactor : Reflect.NuclearAuditor.auditStreamingNuclearReactorProofExport = True
+prfAuditStreamingNuclearReactor = Reflect.NuclearAuditor.auditStreamingNuclearReactor
+
 0 prfHadron1 : (Wiki.Observations.StandardModel.auditFullStandardModelCatalogProof = True)
 prfHadron1 = Refl
 
@@ -79,6 +85,8 @@ main = do
   putStrLn "   - Weizsäcker Liquid-Drop Coulomb & Asymmetry DepPoly: INJECTED & VALID (Refl) ✅"
   putStrLn "   - Gell-Mann–Okubo Hadron Mass Decuplet DepPoly: INJECTED & VALID (Refl) ✅"
   putStrLn "   - Wigner SU(4) Spin-Isospin & Certified Alpha Core (2p+2n=4): INJECTED & VALID (Refl) ✅"
+  putStrLn "   - Stellar Nuclide Multiset Conservation (Authentic Carrier): INJECTED & VALID (Refl) ✅"
+  putStrLn "   - Streaming Nuclear Reactor Transducer (A=206, Q=95 MeV): INJECTED & VALID (Refl) ✅"
   putStrLn ""
   putStrLn "1. Hadron Quark Multiset Confinement & Gauge Vertices:"
   if prop_standardModelCatalogValid && prop_hadronSingletBalanceValid &&
@@ -98,7 +106,9 @@ main = do
      Wiki.Observations.StellarNucleosynthesis.auditLinearStellarFusionProof &&
      Wiki.Observations.CosmicNucleosynthesis.auditCosmicNucleosynthesisProof &&
      Wiki.Observations.PlasmaRecombination.auditPlasmaRecombinationDecouplingProof &&
-     Wiki.Observations.AlphaReplication.auditTripleAlphaCarbonBalanceProof
+     Wiki.Observations.AlphaReplication.auditTripleAlphaCarbonBalanceProof &&
+     Reflect.NuclearAuditor.auditStellarNuclideMultisetConservationProofExport &&
+     Reflect.NuclearAuditor.auditStreamingNuclearReactorProofExport
      then putStrLn "   [PASSED] Hadron Confinement & All 16 Hadronic Suites Clean!"
      else do
        putStrLn "   [FAILED] Static Invariant Audits Failed!"
