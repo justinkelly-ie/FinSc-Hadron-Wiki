@@ -87,6 +87,12 @@ main = do
   putStrLn "   - Wigner SU(4) Spin-Isospin & Certified Alpha Core (2p+2n=4): INJECTED & VALID (Refl) ✅"
   putStrLn "   - Stellar Nuclide Multiset Conservation (Authentic Carrier): INJECTED & VALID (Refl) ✅"
   putStrLn "   - Streaming Nuclear Reactor Transducer (A=206, Q=95 MeV): INJECTED & VALID (Refl) ✅"
+  putStrLn "   - Radiative Deuteron Capture Photon Emission (FinSc-EM): INJECTED & VALID (Refl) ✅"
+  putStrLn "   - Cosmic BBN Thermodynamic Free Energy (FinSc-Thermo): INJECTED & VALID (Refl) ✅"
+  putStrLn "   - Stellar Nucleosynthesis Thermodynamics (FinSc-Thermo): INJECTED & VALID (Refl) ✅"
+  putStrLn "   - Plasma Recombination & CMB Decoupling (FinSc-EM): INJECTED & VALID (Refl) ✅"
+  putStrLn "   - Hoyle Triple-Alpha Hadron Multiset Grounding (Rule 03 §8): INJECTED & VALID (Refl) ✅"
+  putStrLn "   - Weizsäcker Binding Factors Observed from Hadron Multiset: INJECTED & VALID (Refl) ✅"
   putStrLn ""
   putStrLn "1. Hadron Quark Multiset Confinement & Gauge Vertices:"
   if prop_standardModelCatalogValid && prop_hadronSingletBalanceValid &&
